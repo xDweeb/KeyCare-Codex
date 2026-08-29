@@ -46,3 +46,30 @@ Content-Type: application/json
 Once running, visit:
 - Swagger UI: http://localhost:8000/docs
 - ReDoc: http://localhost:8000/redoc
+
+## Heroku Demo Deployment
+
+The existing demo backend is hosted on Heroku at:
+
+`https://keycare-gemini3-api-2587283546dc.herokuapp.com`
+
+Heroku runs the backend with the command in `Procfile`:
+
+```text
+uvicorn main:app --host 0.0.0.0 --port $PORT
+```
+
+Required Heroku Config Vars:
+
+- `OPENAI_API_KEY` — set only in Heroku Settings; never commit or paste it into a command saved in shell history.
+- `OPENAI_MODEL=gpt-5-mini`
+
+The current repository is a multi-project repository, while the existing Heroku app deploys `backend-api/` as its application root. After authenticating with `heroku login`, deploy the `backend-api/` subtree from `feat/core-ai-android` using the existing app's established Git or GitHub deployment connection. Do not merge to `main` solely for deployment.
+
+Verify deployment without invoking OpenAI:
+
+```bash
+curl https://keycare-gemini3-api-2587283546dc.herokuapp.com/health
+```
+
+The health endpoint reports service/provider configuration status but never calls OpenAI and never returns credentials.
