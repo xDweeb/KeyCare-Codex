@@ -1,16 +1,27 @@
 {
   "nav": {
-    "features": "Fonctionnalités",
+    "features": "Fonctions",
     "howItWorks": "Comment ça marche",
     "screenshots": "Captures d'écran",
     "beta": "Bêta",
     "faq": "FAQ",
-    "team": "Équipe"
+    "team": "Équipe",
+    "home": "Accueil KeyCare",
+    "primary": "Navigation principale",
+    "mobile": "Navigation mobile",
+    "language": "Choisir la langue",
+    "demo": "Essayer",
+    "mobileApp": "App mobile",
+    "privacy": "Confidentialité",
+    "availability": "Disponibilité",
+    "contact": "Contact",
+    "openMenu": "Ouvrir le menu de navigation",
+    "closeMenu": "Fermer le menu de navigation"
   },
   "hero": {
-    "title": "Tapez en toute sécurité.",
+    "title": "Réfléchissez avant d’envoyer.",
     "titleHighlight": "Communiquez avec bienveillance.",
-    "subtitle": "KeyCare est un clavier Android alimenté par l'IA qui détecte les messages nuisibles en temps réel et vous aide à mieux vous exprimer. Pas de regrets, juste une communication réfléchie.",
+    "subtitle": "KeyCare comprend la darija, l’arabe, le français, l’anglais, l’arabizi et la façon naturelle dont les Marocains les mélangent, puis améliore votre message sans changer votre intention.",
     "downloadApk": "Télécharger l'APK",
     "joinBeta": "Rejoindre la Bêta",
     "androidOnly": "Android uniquement • Activez 'Sources inconnues' pour installer",
@@ -18,7 +29,17 @@
       "privacy": "Vie privée d'abord",
       "realtime": "IA en temps réel",
       "multilingual": "Multilingue"
-    }
+    },
+    "eyebrow": "IA de communication pensée pour le Maroc",
+    "highlight": "Communiquez mieux.",
+    "tryDemo": "Essayer la démo web",
+    "checkAvailability": "Voir la disponibilité",
+    "signalsLabel": "Principes clés du produit",
+    "signalLanguages": "Conçu pour les messages multilingues",
+    "signalControl": "Vous choisissez chaque suggestion",
+    "signalPrivacy": "Les messages ne sont pas stockés par défaut",
+    "previewLabel": "Aperçu des actions KeyCare connectées par l’API partagée",
+    "previewAction": "API de production"
   },
   "howItWorks": {
     "label": "Processus",
@@ -41,8 +62,8 @@
   },
   "features": {
     "label": "Fonctionnalités",
-    "title": "Fonctionnalités Puissantes",
-    "subtitle": "Tout ce dont vous avez besoin pour une messagerie bienveillante",
+    "title": "Conçu pour la communication au Maroc",
+    "subtitle": "Un assistant d’écriture ciblé qui préserve le sens, gère les écritures mixtes et laisse l’expéditeur décider.",
     "items": {
       "aiDetection": {
         "title": "Détection IA des Risques",
@@ -67,8 +88,33 @@
       "offline": {
         "title": "Fonctionne Hors Ligne",
         "description": "Les fonctionnalités principales fonctionnent sans internet. L'IA cloud est disponible pour une meilleure précision"
+      },
+      "multilingual": {
+        "title": "La darija dès la conception",
+        "description": "Comprend la darija en caractères arabes ou en arabizi, ainsi que l’arabe, le français, l’anglais et leur mélange naturel."
+      },
+      "actions": {
+        "title": "Six actions ciblées",
+        "description": "Améliorer, professionnel, traduire, apaiser, respectueux et analyse du ton couvrent les besoins réels du MVP."
+      },
+      "control": {
+        "title": "L’expéditeur décide",
+        "description": "KeyCare n’envoie et n’insère jamais de texte automatiquement. La suggestion reste clairement séparée de l’original."
+      },
+      "privacy": {
+        "title": "Privé par défaut",
+        "description": "Les messages sont traités uniquement pour la requête en cours et ne sont pas stockés par défaut dans le MVP."
+      },
+      "resilient": {
+        "title": "Erreurs clairement expliquées",
+        "description": "Validation, délai, réseau ou fournisseur : le texte original est conservé et le problème est expliqué."
+      },
+      "shared": {
+        "title": "Un contrat partagé",
+        "description": "Le web, le clavier Android et l’extension utilisent la même structure versionnée de requête et de réponse backend."
       }
-    }
+    },
+    "eyebrow": "Une intelligence, chaque interface"
   },
   "screenshots": {
     "label": "Interface",
@@ -142,16 +188,220 @@
     }
   },
   "footer": {
-    "tagline": "Tapez en sécurité. Communiquez avec bienveillance.",
+    "tagline": "Une couche d’IA de communication pensée pour le Maroc, qui aide chacun à exprimer son intention plus clairement.",
     "links": "Liens Rapides",
     "contact": "Contact",
-    "privacy": "Politique de Confidentialité",
-    "terms": "Conditions d'Utilisation",
+    "privacy": "Confidentialité",
+    "terms": "Conditions",
     "betaNote": "KeyCare est actuellement en bêta. Les fonctionnalités et la disponibilité peuvent changer.",
-    "copyright": "© 2026 KeyCare. Tous droits réservés."
+    "copyright": "© 2026 KeyCare. Tous droits réservés.",
+    "legal": "Liens légaux",
+    "beta": "MVP de hackathon · Les fonctions et la disponibilité peuvent évoluer"
   },
   "privacy": {
-    "title": "Politique de Confidentialité",
-    "content": "KeyCare s'engage à protéger votre vie privée. Toute l'analyse de texte se fait sur votre appareil. Nous ne collectons, ne stockons ni ne partageons vos messages."
+    "title": "Vos mots restent les vôtres.",
+    "content": "KeyCare s'engage à protéger votre vie privée. Toute l'analyse de texte se fait sur votre appareil. Nous ne collectons, ne stockons ni ne partageons vos messages.",
+    "eyebrow": "Confidentialité en langage clair",
+    "subtitle": "KeyCare est une aide à l’écriture. Il traite le texte que vous soumettez explicitement, renvoie un résultat et vous laisse le choix final.",
+    "readPolicy": "Lire la notice de confidentialité",
+    "items": {
+      "request": {
+        "title": "Uniquement sur demande explicite",
+        "description": "La démo web traite le texte après votre choix d’action et votre validation."
+      },
+      "storage": {
+        "title": "Aucun stockage par défaut",
+        "description": "Le MVP du hackathon ne nécessite ni compte ni base persistante de messages."
+      },
+      "control": {
+        "title": "Aucun envoi automatique",
+        "description": "Un résultat est une suggestion. Vous choisissez de la copier, l’utiliser, la modifier ou l’ignorer."
+      },
+      "credentials": {
+        "title": "Les clés restent côté serveur",
+        "description": "Les identifiants privés du fournisseur d’IA ne sont jamais intégrés au site ni renvoyés au navigateur."
+      }
+    }
+  },
+  "meta": {
+    "homeTitle": "KeyCare — Réfléchissez avant d’envoyer",
+    "privacyTitle": "Confidentialité — KeyCare",
+    "termsTitle": "Conditions du MVP — KeyCare",
+    "description": "Une couche d’IA de communication pensée pour le Maroc, la darija, l’arabe, le français, l’anglais, l’arabizi et les messages multilingues."
+  },
+  "demo": {
+    "eyebrow": "MVP interactif",
+    "title": "Dites-le à votre façon. Affinez-le avec soin.",
+    "subtitle": "Testez l’expérience KeyCare partagée en darija, arabe, français, anglais ou en mélange. La suggestion reste séparée jusqu’à ce que vous décidiez de la copier.",
+    "messageLabel": "Votre message",
+    "placeholder": "Écrivez un message dans une langue prise en charge…",
+    "examplesLabel": "Exemples :",
+    "example1": "Arabizi + français",
+    "example2": "Darija + arabe",
+    "example3": "Français + anglais",
+    "actionLabel": "Que doit faire KeyCare ?",
+    "targetLabel": "Traduire vers",
+    "transformButton": "Créer une suggestion",
+    "analyzeButton": "Vérifier le ton",
+    "loading": "Traitement de votre message…",
+    "liveMode": "Connecté à l’API KeyCare de production",
+    "emptyTitle": "Votre résultat apparaîtra ici",
+    "emptyText": "Choisissez une action et envoyez votre message. L’original reste toujours sous votre contrôle.",
+    "emptyError": "Saisissez un message pour continuer.",
+    "timeoutError": "La requête a pris trop de temps. Votre message original reste inchangé.",
+    "serviceError": "KeyCare ne peut pas traiter ce message pour le moment. Réessayez.",
+    "copyError": "La copie a été bloquée par votre navigateur. Sélectionnez la suggestion et copiez-la manuellement.",
+    "suggestionTitle": "Formulation suggérée",
+    "analysisTitle": "Analyse du ton",
+    "notSent": "Jamais envoyé automatiquement",
+    "tone": "Ton",
+    "languages": "Langues détectées",
+    "codeSwitch": "Alternance linguistique",
+    "arabizi": "Arabizi",
+    "copy": "Copier la suggestion",
+    "copied": "Copiée",
+    "keepOriginal": "Garder l’original",
+    "tryAnother": "Essayer une autre action",
+    "clear": "Effacer"
+  },
+  "actions": {
+    "improve": "Améliorer",
+    "professional": "Professionnel",
+    "translate": "Traduire",
+    "calm": "Apaiser",
+    "respectful": "Respectueux",
+    "analyze": "Analyser le ton"
+  },
+  "languages": {
+    "darija": "Darija",
+    "ar": "Arabe",
+    "fr": "Français",
+    "en": "Anglais"
+  },
+  "common": {
+    "yes": "Oui",
+    "no": "Non",
+    "detected": "Détecté",
+    "notDetected": "Non détecté",
+    "skip": "Aller au contenu"
+  },
+  "mobileShowcase": {
+    "eyebrow": "Aperçu du clavier mobile",
+    "title": "KeyCare sur mobile, étape par étape.",
+    "subtitle": "Découvrez le parcours actuel du MVP, du premier accueil au clavier configuré, avec une formulation plus sûre qui reste sous le contrôle de l’utilisateur.",
+    "badge": "Interface actuelle du MVP",
+    "galleryLabel": "Captures de l’interface mobile KeyCare",
+    "items": {
+      "welcome": {
+        "title": "Un accueil clair",
+        "description": "Une introduction ciblée explique l’objectif de KeyCare avant de commencer la configuration.",
+        "alt": "Écran d’accueil mobile de KeyCare"
+      },
+      "rewrite": {
+        "title": "Comparer avant de choisir",
+        "description": "Le signal de risque initial et l’alternative plus sûre restent séparés afin que l’utilisateur prenne la décision finale.",
+        "alt": "Écran mobile KeyCare comparant une formulation risquée et une formulation plus sûre"
+      },
+      "setup": {
+        "title": "Configuration guidée du clavier",
+        "description": "Une courte liste explique comment activer KeyCare et accorder les accès nécessaires aux fonctions d’IA.",
+        "alt": "Liste de configuration du clavier mobile KeyCare"
+      },
+      "ready": {
+        "title": "État et réglages en un coup d’œil",
+        "description": "L’accueil confirme la configuration et facilite l’accès au test et aux préférences du clavier.",
+        "alt": "Écran mobile KeyCare prêt à l’emploi et réglages du clavier"
+      }
+    },
+    "note": "Ces captures montrent l’interface actuelle du MVP. Les textes et étapes de configuration peuvent évoluer avant la publication d’un build mobile validé."
+  },
+  "availability": {
+    "eyebrow": "État du produit transparent",
+    "title": "Ce que vous pouvez utiliser aujourd’hui",
+    "subtitle": "Cette page distingue la démo web fonctionnelle des paquets et intégrations encore en préparation.",
+    "web": {
+      "label": "Web",
+      "status": "Démo prête",
+      "title": "Application web interactive",
+      "description": "Essayez les six actions du MVP avec des exemples multilingues et des résultats en direct fournis par l’API KeyCare de production.",
+      "cta": "Ouvrir la démo"
+    },
+    "android": {
+      "label": "Android",
+      "status": "Selon le build",
+      "title": "Clavier personnalisé",
+      "description": "Le clavier Android est une interface MVP distincte. Un lien APK n’apparaît que lorsqu’une URL de build validé est configurée.",
+      "cta": "Télécharger l’APK validé",
+      "unavailable": "Aucun APK public n’est lié pour le moment"
+    },
+    "extension": {
+      "label": "Navigateur",
+      "status": "En développement",
+      "title": "Extension de navigateur",
+      "description": "L’intégration navigateur est un chantier MVP coordonné et n’est pas présentée comme disponible sur une boutique publique.",
+      "unavailable": "Téléchargement public à venir"
+    }
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Une question, un retour ou une demande de démo ?",
+    "subtitle": "Échangez avec l’équipe KeyCare sur le produit, la confidentialité, l’accessibilité ou la démo du hackathon.",
+    "cta": "Écrire à l’équipe"
+  },
+  "legal": {
+    "back": "Retour à KeyCare",
+    "updated": "Dernière mise à jour : 29 août 2026",
+    "privacy": {
+      "title": "Notice de confidentialité",
+      "intro": "Cette notice décrit le fonctionnement prévu du MVP KeyCare en matière de confidentialité. Elle couvre la démo web publique et les principes de traitement partagés entre les interfaces.",
+      "sections": {
+        "processing": {
+          "title": "Données traitées",
+          "content": "KeyCare traite uniquement le texte du message, l’action choisie et la langue cible éventuelle nécessaires à la demande. Lorsque vous validez, le message est transmis de manière sécurisée à l’API KeyCare de production pour la requête en cours."
+        },
+        "storage": {
+          "title": "Stockage et comptes",
+          "content": "Le MVP ne nécessite ni compte, ni paiement, ni base persistante de messages. Les messages ne sont pas stockés par défaut. La préférence de langue peut être conservée localement sur votre appareil."
+        },
+        "providers": {
+          "title": "Fournisseurs d’IA et sécurité",
+          "content": "Le backend de production peut transmettre le texte à un fournisseur d’IA pour produire le résultat. Les identifiants privés restent sur le backend et ne figurent jamais dans le code client, les requêtes du navigateur ou les résultats."
+        },
+        "rights": {
+          "title": "Votre contrôle",
+          "content": "KeyCare n’envoie jamais de message à votre place. L’original et la suggestion sont affichés séparément. Vous pouvez copier, modifier, ignorer ou supprimer chaque suggestion."
+        },
+        "contact": {
+          "title": "Contact",
+          "content": "Pour toute question de confidentialité, contactez {{email}}."
+        }
+      }
+    },
+    "terms": {
+      "title": "Conditions du MVP",
+      "intro": "Ces conditions en langage clair s’appliquent au MVP KeyCare et à sa démo publique. Le produit est expérimental et peut évoluer pendant les tests et améliorations.",
+      "sections": {
+        "purpose": {
+          "title": "Objectif d’assistance",
+          "content": "KeyCare fournit des suggestions d’écriture et des indications de ton. Il ne décide pas à votre place, ne vérifie pas les faits, ne fournit pas de conseil professionnel et n’est pas un service de messagerie autonome."
+        },
+        "control": {
+          "title": "Votre responsabilité et votre contrôle",
+          "content": "Relisez chaque suggestion avant de l’utiliser. Vous restez responsable de votre message, de son sens, de ses destinataires et de la décision de l’envoyer."
+        },
+        "availability": {
+          "title": "Disponibilité bêta",
+          "content": "Le MVP est fourni selon sa disponibilité. Les fonctions, langues prises en charge, intégrations et la disponibilité peuvent évoluer, et le service peut être interrompu pendant le développement."
+        },
+        "responsibility": {
+          "title": "Utilisation acceptable",
+          "content": "N’utilisez pas KeyCare pour enfreindre la loi, nuire à autrui, exposer des informations confidentielles ou contourner les règles d’un autre service. Évitez de soumettre des données sensibles à une démo expérimentale."
+        },
+        "contact": {
+          "title": "Contact",
+          "content": "Pour toute question sur ces conditions, contactez {{email}}."
+        }
+      }
+    }
   }
 }

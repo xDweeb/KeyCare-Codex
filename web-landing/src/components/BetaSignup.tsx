@@ -1,6 +1,6 @@
 import { useState, FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from '../utils/motion';
 
 // --- Icons ---
 const RocketIcon = () => (

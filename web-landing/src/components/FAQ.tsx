@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from '../utils/motion';
 
 // Modern Plus/Minus Icon for Accordion
 const AccordionIcon = ({ isOpen }: { isOpen: boolean }) => (

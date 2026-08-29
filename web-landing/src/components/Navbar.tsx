@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from '../utils/motion';
 
 // Language Data
 const languages = [
@@ -37,6 +37,7 @@ export default function Navbar() {
   const currentLang = languages.find(l => l.code === i18n.language) || languages[0];
 
   const navLinks = [
+    { href: '/app', label: t('nav.demo') },
     { href: '#features', label: t('nav.features') },
     { href: '#howItWorks', label: t('nav.howItWorks') }, // Fixed anchor
     { href: '#screenshots', label: t('nav.screenshots') },

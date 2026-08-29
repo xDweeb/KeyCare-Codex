@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from '../utils/motion';
 
 // ============================================
 // 🔧 EDIT YOUR LINKS HERE
