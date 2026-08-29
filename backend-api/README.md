@@ -1,6 +1,6 @@
-# KeyCare-Gemini3 Backend API
+# KeyCare Backend API
 
-FastAPI server providing AI-powered communication mediation using Gemini 3.
+FastAPI server providing AI-powered communication mediation for KeyCare clients.
 
 ## Quick Start
 

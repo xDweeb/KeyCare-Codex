@@ -1,4 +1,4 @@
-# KeyCare-Gemini3 Backend Dependencies
+# KeyCare Backend Dependencies
 # =====================================
 
 # Web Framework

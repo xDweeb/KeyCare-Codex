@@ -1,5 +1,5 @@
 """
-KeyCare-Gemini3 Backend API
+KeyCare Backend API
 ===========================
 FastAPI server that provides AI-powered communication mediation using Gemini 3.
 """
@@ -30,7 +30,7 @@ logger = logging.getLogger("keycare")
 # Configuration
 # ============================================
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3")  # Default to Gemini 3 for hackathon
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3")
 ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
 DEBUG = os.getenv("DEBUG", "false").lower() == "true"
 VERSION = "1.4.0"
@@ -93,7 +93,7 @@ REWRITE_BLOCKLIST = {
 # FastAPI App
 # ============================================
 app = FastAPI(
-    title="KeyCare-Gemini3 API",
+    title="KeyCare API",
     description="AI-powered communication mediation using Gemini 3",
     version="1.0.0",
 )
@@ -640,7 +640,7 @@ Analyze the message and respond with ONLY the JSON:"""
 async def root():
     """Root endpoint - API info."""
     return {
-        "name": "KeyCare-Gemini3 API",
+        "name": "KeyCare API",
         "version": "1.0.0",
         "docs": "/docs",
         "health": "/health"
@@ -716,7 +716,7 @@ if __name__ == "__main__":
     host = os.getenv("HOST", "0.0.0.0")
     port = int(os.getenv("PORT", 8000))
     
-    print(f"🚀 Starting KeyCare-Gemini3 API on {host}:{port}")
+    print(f"🚀 Starting KeyCare API on {host}:{port}")
     print(f"📚 Docs available at http://{host}:{port}/docs")
     
     uvicorn.run(app, host=host, port=port, reload=DEBUG)

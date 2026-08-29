@@ -44,14 +44,7 @@ android-ime/
 
 ## Build Instructions
 
-### 1. Generate Gradle Wrapper (first time only)
-
-```powershell
-cd "0x01 Taibi El Yakouti\android-ime"
-gradle wrapper --gradle-version 8.7
-```
-
-### 2. Build Debug APK
+### 1. Build Debug APK
 
 ```powershell
 .\gradlew.bat assembleDebug
@@ -59,7 +52,7 @@ gradle wrapper --gradle-version 8.7
 
 APK location: `app\build\outputs\apk\debug\app-debug.apk`
 
-### 3. Install on Phone
+### 2. Install on Phone
 
 Connect your phone via USB with USB debugging enabled:
 
@@ -134,4 +127,4 @@ To change this, edit the `BASE_URL` constant in:
 
 ## License
 
-Part of the KeyCare project for the Enactus Morocco National Competition 2024.
+Built with Codex.
