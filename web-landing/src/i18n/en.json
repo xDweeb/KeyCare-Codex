@@ -1,157 +1,82 @@
 {
+  "meta": { "homeTitle": "KeyCare — Think before you send", "privacyTitle": "Privacy — KeyCare", "termsTitle": "MVP Terms — KeyCare", "description": "A Morocco-first AI communication layer for Darija, Arabic, French, English, Arabizi, and mixed-language messages." },
   "nav": {
-    "features": "Features",
-    "howItWorks": "How It Works",
-    "screenshots": "Screenshots",
-    "beta": "Beta",
-    "faq": "FAQ",
-    "team": "Team"
+    "home": "KeyCare home", "primary": "Primary navigation", "mobile": "Mobile navigation", "language": "Choose language",
+    "demo": "Try it", "features": "Capabilities", "privacy": "Privacy", "availability": "Availability", "contact": "Contact",
+    "openMenu": "Open navigation menu", "closeMenu": "Close navigation menu"
   },
   "hero": {
-    "title": "Type Safely.",
-    "titleHighlight": "Communicate Mindfully.",
-    "subtitle": "KeyCare is an AI-powered Android keyboard that detects harmful messages in real-time and helps you express yourself better. No regrets, just thoughtful communication.",
-    "downloadApk": "Download APK",
-    "joinBeta": "Join Beta",
-    "androidOnly": "Android only • Enable 'Install from unknown sources' to install",
-    "badges": {
-      "privacy": "Privacy-first",
-      "realtime": "Real-time AI",
-      "multilingual": "Multilingual"
-    }
+    "eyebrow": "Morocco-first communication AI", "title": "Think before you send.", "highlight": "Communicate better.",
+    "subtitle": "KeyCare understands Darija, Arabic, French, English, Arabizi, and the way Moroccans naturally mix them—then helps you improve your message without changing your intent.",
+    "tryDemo": "Try the web demo", "checkAvailability": "Check availability", "signalsLabel": "Key product principles",
+    "signalLanguages": "Built for mixed-language messages", "signalControl": "You choose every suggestion", "signalPrivacy": "Messages are not stored by default",
+    "previewLabel": "Example of a KeyCare professional rewrite", "previewAction": "Professional"
   },
-  "howItWorks": {
-    "label": "Process",
-    "title": "How It Works",
-    "subtitle": "Three simple steps to better communication",
-    "steps": {
-      "type": {
-        "title": "Type",
-        "description": "Write your message naturally using KeyCare keyboard"
-      },
-      "detect": {
-        "title": "Detect",
-        "description": "AI analyzes your text in real-time for potential harm"
-      },
-      "rewrite": {
-        "title": "Rewrite",
-        "description": "Get kinder suggestions with one tap"
-      }
-    }
+  "demo": {
+    "eyebrow": "Interactive MVP", "title": "Say it your way. Refine it with care.",
+    "subtitle": "Test the shared KeyCare experience with Darija, Arabic, French, English, or a mix. The suggestion stays separate until you choose to copy it.",
+    "messageLabel": "Your message", "placeholder": "Write a message in any supported language…", "examplesLabel": "Examples:",
+    "example1": "Arabizi + French", "example2": "Darija + Arabic", "example3": "French + English", "actionLabel": "What would you like KeyCare to do?", "targetLabel": "Translate to",
+    "transformButton": "Create suggestion", "analyzeButton": "Check tone", "loading": "Working on your message…",
+    "mockMode": "Contract-compatible demo data — no message leaves this browser", "liveMode": "Connected to the KeyCare API",
+    "emptyTitle": "Your result will appear here", "emptyText": "Choose an action and submit your message. Your original always remains under your control.",
+    "emptyError": "Enter a message to continue.", "timeoutError": "The request took too long. Your original message is unchanged.",
+    "serviceError": "KeyCare could not process this message right now. Please try again.", "copyError": "Copying was blocked by your browser. Select the suggestion and copy it manually.",
+    "suggestionTitle": "Suggested wording", "analysisTitle": "Tone check", "notSent": "Not sent automatically",
+    "tone": "Tone", "languages": "Detected languages", "codeSwitch": "Code-switching", "arabizi": "Arabizi", "copy": "Copy suggestion", "copied": "Copied", "keepOriginal": "Keep original"
   },
+  "actions": { "improve": "Improve", "professional": "Professional", "translate": "Translate", "calm": "Calm", "respectful": "Respectful", "analyze": "Tone Check" },
+  "languages": { "darija": "Darija", "ar": "Arabic", "fr": "French", "en": "English" },
+  "common": { "yes": "Yes", "no": "No", "detected": "Detected", "notDetected": "Not detected", "skip": "Skip to content" },
   "features": {
-    "label": "Features",
-    "title": "Powerful Features",
-    "subtitle": "Everything you need for mindful messaging",
+    "eyebrow": "One intelligence, every surface", "title": "Made for how Morocco communicates", "subtitle": "A focused writing assistant that preserves meaning, handles mixed scripts, and keeps the sender in control.",
     "items": {
-      "aiDetection": {
-        "title": "AI Risk Detection",
-        "description": "Advanced AI identifies potentially harmful or hurtful messages before you send them"
-      },
-      "smartRewrite": {
-        "title": "Smart Rewrite",
-        "description": "Get intelligent suggestions to rephrase your message in a kinder, more constructive way"
-      },
-      "multiLanguage": {
-        "title": "3 Languages",
-        "description": "Full support for English, French, and Arabic with native keyboard layouts"
-      },
-      "privacyFirst": {
-        "title": "Privacy First",
-        "description": "Your messages are analyzed locally. We never store or share your personal data"
-      },
-      "customizable": {
-        "title": "Customizable",
-        "description": "Adjust keyboard size, themes, and sensitivity to match your preferences"
-      },
-      "offline": {
-        "title": "Works Offline",
-        "description": "Core features work without internet. Cloud AI available for enhanced accuracy"
-      }
+      "multilingual": { "title": "Darija-aware by design", "description": "Understand Darija in Arabic script or Arabizi, plus Arabic, French, English, and natural code-switching." },
+      "actions": { "title": "Six focused actions", "description": "Improve, professional, translate, calm, respectful, and tone check cover the MVP’s real communication needs." },
+      "control": { "title": "The sender decides", "description": "KeyCare never sends or inserts text automatically. Suggestions remain clearly separate from the original." },
+      "privacy": { "title": "Private by default", "description": "Messages are processed only for the current request and are not stored by default in the MVP." },
+      "resilient": { "title": "Clear failure states", "description": "Validation, timeout, network, and provider errors keep the original text intact and explain what happened." },
+      "shared": { "title": "One shared contract", "description": "The web, Android keyboard, and browser extension use the same versioned backend request and response shape." }
     }
-  },
-  "screenshots": {
-    "label": "Interface",
-    "title": "See It In Action",
-    "subtitle": "Experience the KeyCare keyboard interface"
-  },
-  "beta": {
-    "label": "Early Access",
-    "title": "Join the Beta",
-    "subtitle": "Be among the first to experience KeyCare and help shape its future",
-    "emailPlaceholder": "Enter your email",
-    "submit": "Get Early Access",
-    "submitting": "Submitting...",
-    "success": "Thanks! We'll be in touch soon.",
-    "error": "Something went wrong. Please try again.",
-    "configError": "Beta signup is currently unavailable. Please check back later.",
-    "privacyNote": "We respect your privacy. No spam, ever."
-  },
-  "team": {
-    "label": "Our Minds",
-    "title": "Meet the Team",
-    "subtitle": "The people behind KeyCare",
-    "members": {
-      "taibi": {
-        "name": "Taibi El Yakouti",
-        "role": "Mobile/IME & Product Lead"
-      },
-      "mohammed": {
-        "name": "Mohammed-Ali EL MADANI",
-        "role": "AI & Backend Engineer"
-      },
-      "kawtar": {
-        "name": "EL GADDI Kawtar",
-        "role": "UI/UX Designer"
-      },
-      "aya": {
-        "name": "Aya HASSOUNE",
-        "role": "Storytelling & Pitch"
-      }
-    }
-  },
-  "faq": {
-    "label": "Support",
-    "title": "Frequently Asked Questions",
-    "subtitle": "Got questions? We've got answers",
-    "items": {
-      "q1": {
-        "question": "Is KeyCare free to use?",
-        "answer": "Yes! KeyCare is completely free during the beta period. We may introduce premium features in the future, but core functionality will always remain free."
-      },
-      "q2": {
-        "question": "Does KeyCare read my messages?",
-        "answer": "KeyCare analyzes text locally on your device to detect potential harm. We never store, transmit, or share your messages. Your privacy is our top priority."
-      },
-      "q3": {
-        "question": "What languages are supported?",
-        "answer": "KeyCare currently supports English, French, and Arabic with full keyboard layouts and AI detection for each language."
-      },
-      "q4": {
-        "question": "Does it work offline?",
-        "answer": "Yes! Core detection features work offline. For the most accurate AI suggestions, an internet connection is recommended but not required."
-      },
-      "q5": {
-        "question": "How do I install the APK?",
-        "answer": "Download the APK, open it on your Android device, and follow the prompts. You may need to enable 'Install from unknown sources' in your device settings."
-      },
-      "q6": {
-        "question": "Is there an iOS version?",
-        "answer": "Currently, KeyCare is only available for Android. An iOS version is on our roadmap for future development."
-      }
-    }
-  },
-  "footer": {
-    "tagline": "Type safely. Communicate mindfully.",
-    "links": "Quick Links",
-    "contact": "Contact",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Service",
-    "betaNote": "KeyCare is currently in beta. Features and availability may change.",
-    "copyright": "© 2026 KeyCare. All rights reserved."
   },
   "privacy": {
-    "title": "Privacy Policy",
-    "content": "KeyCare is committed to protecting your privacy. All text analysis happens on your device. We do not collect, store, or share your messages."
+    "eyebrow": "Plain-language privacy", "title": "Your words remain yours.", "subtitle": "KeyCare is an assistive writing layer. It processes the text you explicitly submit, returns a result, and leaves the final choice with you.", "readPolicy": "Read the privacy notice",
+    "items": {
+      "request": { "title": "Explicit requests only", "description": "The web demo processes text only after you choose an action and submit it." },
+      "storage": { "title": "No message storage by default", "description": "The hackathon MVP does not require accounts or a persistent message database." },
+      "control": { "title": "No automatic sending", "description": "A result is a suggestion. You decide whether to copy, use, edit, or dismiss it." },
+      "credentials": { "title": "Provider keys stay server-side", "description": "Private AI credentials are never embedded in the website or returned to the browser." }
+    }
+  },
+  "availability": {
+    "eyebrow": "Honest product status", "title": "What you can use today", "subtitle": "This page distinguishes the working web demo from packages and integrations that are still being prepared.",
+    "web": { "label": "Web", "status": "Demo ready", "title": "Interactive web app", "description": "Try all six MVP actions with multilingual examples and contract-compatible local demo responses or a configured backend.", "cta": "Open the demo" },
+    "android": { "label": "Android", "status": "Build-dependent", "title": "Custom keyboard", "description": "The Android keyboard is a separate MVP surface. An APK link appears here only when a reviewed build URL is configured.", "cta": "Download reviewed APK", "unavailable": "No public APK is linked yet" },
+    "extension": { "label": "Browser", "status": "In development", "title": "Browser extension", "description": "The browser integration is a coordinated MVP workstream and is not presented here as a public store release.", "unavailable": "Public download coming later" }
+  },
+  "contact": { "eyebrow": "Contact", "title": "Questions, feedback, or a demo request?", "subtitle": "Talk to the KeyCare team about the product, privacy approach, accessibility, or the hackathon demo.", "cta": "Email the team" },
+  "footer": { "tagline": "A Morocco-first AI communication layer that helps people express their intent more clearly.", "legal": "Legal links", "privacy": "Privacy", "terms": "Terms", "beta": "Hackathon MVP · Features and availability may change" },
+  "legal": {
+    "back": "Back to KeyCare", "updated": "Last updated: August 29, 2026",
+    "privacy": {
+      "title": "Privacy notice", "intro": "This notice describes the privacy behavior intended for the KeyCare hackathon MVP. It covers the public web demo and the shared processing principles used across product surfaces.",
+      "sections": {
+        "processing": { "title": "What is processed", "content": "KeyCare processes only the message text, selected action, and optional target language needed to fulfill the request. The local demo mode does not send the message outside your browser. When a backend is configured, the message is sent to that KeyCare endpoint over the network." },
+        "storage": { "title": "Storage and accounts", "content": "The MVP does not require an account, payment, or a persistent message database. Messages are not stored by default. Browser language preference may be kept locally on your device." },
+        "providers": { "title": "AI providers and security", "content": "A configured backend may send request text to an AI provider to produce the result. Private provider credentials remain on the backend and are never included in client code, browser requests, or results." },
+        "rights": { "title": "Your control", "content": "KeyCare never sends a message on your behalf. The original and suggestion are shown separately. You can copy, edit, dismiss, or ignore every suggestion." },
+        "contact": { "title": "Contact", "content": "For privacy questions, contact {{email}}." }
+      }
+    },
+    "terms": {
+      "title": "MVP terms", "intro": "These plain-language terms apply to the KeyCare hackathon MVP and public demo. The product is experimental and may change as the team tests and improves it.",
+      "sections": {
+        "purpose": { "title": "Assistive purpose", "content": "KeyCare provides writing suggestions and tone signals. It does not make decisions for you, verify facts, provide professional advice, or act as an autonomous messaging service." },
+        "control": { "title": "Your responsibility and control", "content": "Review every suggestion before using it. You remain responsible for your message, its meaning, its recipients, and the decision to send it." },
+        "availability": { "title": "Beta availability", "content": "The MVP is provided as available. Features, supported languages, integrations, and availability may change, and the service may be interrupted during development." },
+        "responsibility": { "title": "Acceptable use", "content": "Do not use KeyCare to violate the law, harm others, expose confidential information, or bypass the rules of another service. Avoid submitting sensitive information to an experimental demo." },
+        "contact": { "title": "Contact", "content": "For questions about these terms, contact {{email}}." }
+      }
+    }
   }
 }

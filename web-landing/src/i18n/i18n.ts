@@ -18,6 +18,8 @@ i18n
   .init({
     resources,
     fallbackLng: 'en',
+    supportedLngs: ['en', 'fr', 'ar'],
+    load: 'languageOnly',
     debug: false,
     interpolation: {
       escapeValue: false,
@@ -30,15 +32,16 @@ i18n
 
 // Helper function to update document direction and language
 export const updateDocumentDirection = (lang: string) => {
-  const dir = lang === 'ar' ? 'rtl' : 'ltr';
-  document.documentElement.lang = lang;
+  const normalizedLanguage = lang.split('-')[0];
+  const dir = normalizedLanguage === 'ar' ? 'rtl' : 'ltr';
+  document.documentElement.lang = normalizedLanguage;
   document.documentElement.dir = dir;
   
   // Update font family for Arabic
-  if (lang === 'ar') {
-    document.body.style.fontFamily = "'Noto Sans Arabic', 'Tahoma', sans-serif";
+  if (normalizedLanguage === 'ar') {
+    document.body.style.fontFamily = "'Noto Sans Arabic', 'Manrope', sans-serif";
   } else {
-    document.body.style.fontFamily = "'Inter', system-ui, sans-serif";
+    document.body.style.fontFamily = "'Manrope', system-ui, sans-serif";
   }
 };
 
