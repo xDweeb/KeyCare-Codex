@@ -1,5 +1,5 @@
 # ========================
-# KeyCare-Gemini3 .gitignore
+# KeyCare .gitignore
 # ========================
 
 # ---- Environment & Secrets ----
@@ -55,7 +55,6 @@ htmlcov/
 *.aab
 *.jks
 *.keystore
-!app/keycare-release.keystore
 output.json
 output-metadata.json
 

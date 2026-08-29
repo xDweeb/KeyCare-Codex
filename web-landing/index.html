@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="./assets/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- SEO Meta Tags -->
+    <title>KeyCare Keyboard - Type Safely, Communicate Mindfully</title>
+    <meta name="description" content="KeyCare is an AI-powered Android keyboard that detects harmful messages in real-time and suggests kinder alternatives. Available in English, French, and Arabic." />
+    <meta name="keywords" content="KeyCare, keyboard, Android, AI, mental health, safe messaging, mindful communication" />
+    <meta name="author" content="KeyCare Team" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://key-care.app/" />
+    <meta property="og:title" content="KeyCare Keyboard - Type Safely, Communicate Mindfully" />
+    <meta property="og:description" content="AI-powered keyboard that helps you communicate better. Detects harmful messages and suggests kinder alternatives." />
+    <meta property="og:image" content="https://key-care.app/assets/og.png" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://key-care.app/" />
+    <meta property="twitter:title" content="KeyCare Keyboard - Type Safely, Communicate Mindfully" />
+    <meta property="twitter:description" content="AI-powered keyboard that helps you communicate better. Detects harmful messages and suggests kinder alternatives." />
+    <meta property="twitter:image" content="https://key-care.app/assets/og.png" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- SPA Redirect Handler for GitHub Pages -->
+    <script>
+      (function() {
+        const redirect = sessionStorage.getItem('redirect');
+        if (redirect) {
+          sessionStorage.removeItem('redirect');
+          window.history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

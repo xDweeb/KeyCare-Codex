@@ -1,0 +1,157 @@
+{
+  "nav": {
+    "features": "Fonctionnalités",
+    "howItWorks": "Comment ça marche",
+    "screenshots": "Captures d'écran",
+    "beta": "Bêta",
+    "faq": "FAQ",
+    "team": "Équipe"
+  },
+  "hero": {
+    "title": "Tapez en toute sécurité.",
+    "titleHighlight": "Communiquez avec bienveillance.",
+    "subtitle": "KeyCare est un clavier Android alimenté par l'IA qui détecte les messages nuisibles en temps réel et vous aide à mieux vous exprimer. Pas de regrets, juste une communication réfléchie.",
+    "downloadApk": "Télécharger l'APK",
+    "joinBeta": "Rejoindre la Bêta",
+    "androidOnly": "Android uniquement • Activez 'Sources inconnues' pour installer",
+    "badges": {
+      "privacy": "Vie privée d'abord",
+      "realtime": "IA en temps réel",
+      "multilingual": "Multilingue"
+    }
+  },
+  "howItWorks": {
+    "label": "Processus",
+    "title": "Comment ça marche",
+    "subtitle": "Trois étapes simples pour une meilleure communication",
+    "steps": {
+      "type": {
+        "title": "Tapez",
+        "description": "Écrivez votre message naturellement avec le clavier KeyCare"
+      },
+      "detect": {
+        "title": "Détection",
+        "description": "L'IA analyse votre texte en temps réel pour détecter les contenus potentiellement nuisibles"
+      },
+      "rewrite": {
+        "title": "Reformulez",
+        "description": "Obtenez des suggestions plus bienveillantes en un seul clic"
+      }
+    }
+  },
+  "features": {
+    "label": "Fonctionnalités",
+    "title": "Fonctionnalités Puissantes",
+    "subtitle": "Tout ce dont vous avez besoin pour une messagerie bienveillante",
+    "items": {
+      "aiDetection": {
+        "title": "Détection IA des Risques",
+        "description": "L'IA avancée identifie les messages potentiellement nuisibles ou blessants avant que vous ne les envoyiez"
+      },
+      "smartRewrite": {
+        "title": "Reformulation Intelligente",
+        "description": "Recevez des suggestions intelligentes pour reformuler votre message de manière plus gentille et constructive"
+      },
+      "multiLanguage": {
+        "title": "3 Langues",
+        "description": "Support complet pour l'anglais, le français et l'arabe avec des dispositions de clavier natives"
+      },
+      "privacyFirst": {
+        "title": "Vie Privée d'Abord",
+        "description": "Vos messages sont analysés localement. Nous ne stockons ni ne partageons jamais vos données personnelles"
+      },
+      "customizable": {
+        "title": "Personnalisable",
+        "description": "Ajustez la taille du clavier, les thèmes et la sensibilité selon vos préférences"
+      },
+      "offline": {
+        "title": "Fonctionne Hors Ligne",
+        "description": "Les fonctionnalités principales fonctionnent sans internet. L'IA cloud est disponible pour une meilleure précision"
+      }
+    }
+  },
+  "screenshots": {
+    "label": "Interface",
+    "title": "Voyez-le en Action",
+    "subtitle": "Découvrez l'interface du clavier KeyCare"
+  },
+  "beta": {
+    "label": "Accès Anticipé",
+    "title": "Rejoignez la Bêta",
+    "subtitle": "Soyez parmi les premiers à découvrir KeyCare et contribuez à son évolution",
+    "emailPlaceholder": "Entrez votre email",
+    "submit": "Obtenir un Accès Anticipé",
+    "submitting": "Envoi en cours...",
+    "success": "Merci ! Nous vous contacterons bientôt.",
+    "error": "Une erreur s'est produite. Veuillez réessayer.",
+    "configError": "L'inscription à la bêta est temporairement indisponible. Revenez plus tard.",
+    "privacyNote": "Nous respectons votre vie privée. Pas de spam, jamais."
+  },
+  "team": {
+    "label": "Nos Esprits",
+    "title": "Rencontrez l'Équipe",
+    "subtitle": "Les personnes derrière KeyCare",
+    "members": {
+      "taibi": {
+        "name": "Taibi El Yakouti",
+        "role": "Mobile/IME & Chef de Produit"
+      },
+      "mohammed": {
+        "name": "Mohammed-Ali EL MADANI",
+        "role": "Ingénieur IA & Backend"
+      },
+      "kawtar": {
+        "name": "EL GADDI Kawtar",
+        "role": "Designer UI/UX"
+      },
+      "aya": {
+        "name": "Aya HASSOUNE",
+        "role": "Storytelling & Pitch"
+      }
+    }
+  },
+  "faq": {
+    "label": "Support",
+    "title": "Questions Fréquentes",
+    "subtitle": "Vous avez des questions ? Nous avons les réponses",
+    "items": {
+      "q1": {
+        "question": "KeyCare est-il gratuit ?",
+        "answer": "Oui ! KeyCare est entièrement gratuit pendant la période bêta. Nous pourrions introduire des fonctionnalités premium à l'avenir, mais les fonctionnalités de base resteront toujours gratuites."
+      },
+      "q2": {
+        "question": "KeyCare lit-il mes messages ?",
+        "answer": "KeyCare analyse le texte localement sur votre appareil pour détecter les contenus potentiellement nuisibles. Nous ne stockons, ne transmettons ni ne partageons jamais vos messages. Votre vie privée est notre priorité absolue."
+      },
+      "q3": {
+        "question": "Quelles langues sont supportées ?",
+        "answer": "KeyCare supporte actuellement l'anglais, le français et l'arabe avec des dispositions de clavier complètes et une détection IA pour chaque langue."
+      },
+      "q4": {
+        "question": "Fonctionne-t-il hors ligne ?",
+        "answer": "Oui ! Les fonctionnalités de détection de base fonctionnent hors ligne. Pour les suggestions IA les plus précises, une connexion internet est recommandée mais pas obligatoire."
+      },
+      "q5": {
+        "question": "Comment installer l'APK ?",
+        "answer": "Téléchargez l'APK, ouvrez-le sur votre appareil Android et suivez les instructions. Vous devrez peut-être activer 'Installer depuis des sources inconnues' dans les paramètres de votre appareil."
+      },
+      "q6": {
+        "question": "Y a-t-il une version iOS ?",
+        "answer": "Actuellement, KeyCare n'est disponible que pour Android. Une version iOS est prévue dans notre feuille de route pour un développement futur."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Tapez en sécurité. Communiquez avec bienveillance.",
+    "links": "Liens Rapides",
+    "contact": "Contact",
+    "privacy": "Politique de Confidentialité",
+    "terms": "Conditions d'Utilisation",
+    "betaNote": "KeyCare est actuellement en bêta. Les fonctionnalités et la disponibilité peuvent changer.",
+    "copyright": "© 2026 KeyCare. Tous droits réservés."
+  },
+  "privacy": {
+    "title": "Politique de Confidentialité",
+    "content": "KeyCare s'engage à protéger votre vie privée. Toute l'analyse de texte se fait sur votre appareil. Nous ne collectons, ne stockons ni ne partageons vos messages."
+  }
+}

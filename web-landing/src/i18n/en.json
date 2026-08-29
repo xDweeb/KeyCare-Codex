@@ -1,0 +1,157 @@
+{
+  "nav": {
+    "features": "Features",
+    "howItWorks": "How It Works",
+    "screenshots": "Screenshots",
+    "beta": "Beta",
+    "faq": "FAQ",
+    "team": "Team"
+  },
+  "hero": {
+    "title": "Type Safely.",
+    "titleHighlight": "Communicate Mindfully.",
+    "subtitle": "KeyCare is an AI-powered Android keyboard that detects harmful messages in real-time and helps you express yourself better. No regrets, just thoughtful communication.",
+    "downloadApk": "Download APK",
+    "joinBeta": "Join Beta",
+    "androidOnly": "Android only • Enable 'Install from unknown sources' to install",
+    "badges": {
+      "privacy": "Privacy-first",
+      "realtime": "Real-time AI",
+      "multilingual": "Multilingual"
+    }
+  },
+  "howItWorks": {
+    "label": "Process",
+    "title": "How It Works",
+    "subtitle": "Three simple steps to better communication",
+    "steps": {
+      "type": {
+        "title": "Type",
+        "description": "Write your message naturally using KeyCare keyboard"
+      },
+      "detect": {
+        "title": "Detect",
+        "description": "AI analyzes your text in real-time for potential harm"
+      },
+      "rewrite": {
+        "title": "Rewrite",
+        "description": "Get kinder suggestions with one tap"
+      }
+    }
+  },
+  "features": {
+    "label": "Features",
+    "title": "Powerful Features",
+    "subtitle": "Everything you need for mindful messaging",
+    "items": {
+      "aiDetection": {
+        "title": "AI Risk Detection",
+        "description": "Advanced AI identifies potentially harmful or hurtful messages before you send them"
+      },
+      "smartRewrite": {
+        "title": "Smart Rewrite",
+        "description": "Get intelligent suggestions to rephrase your message in a kinder, more constructive way"
+      },
+      "multiLanguage": {
+        "title": "3 Languages",
+        "description": "Full support for English, French, and Arabic with native keyboard layouts"
+      },
+      "privacyFirst": {
+        "title": "Privacy First",
+        "description": "Your messages are analyzed locally. We never store or share your personal data"
+      },
+      "customizable": {
+        "title": "Customizable",
+        "description": "Adjust keyboard size, themes, and sensitivity to match your preferences"
+      },
+      "offline": {
+        "title": "Works Offline",
+        "description": "Core features work without internet. Cloud AI available for enhanced accuracy"
+      }
+    }
+  },
+  "screenshots": {
+    "label": "Interface",
+    "title": "See It In Action",
+    "subtitle": "Experience the KeyCare keyboard interface"
+  },
+  "beta": {
+    "label": "Early Access",
+    "title": "Join the Beta",
+    "subtitle": "Be among the first to experience KeyCare and help shape its future",
+    "emailPlaceholder": "Enter your email",
+    "submit": "Get Early Access",
+    "submitting": "Submitting...",
+    "success": "Thanks! We'll be in touch soon.",
+    "error": "Something went wrong. Please try again.",
+    "configError": "Beta signup is currently unavailable. Please check back later.",
+    "privacyNote": "We respect your privacy. No spam, ever."
+  },
+  "team": {
+    "label": "Our Minds",
+    "title": "Meet the Team",
+    "subtitle": "The people behind KeyCare",
+    "members": {
+      "taibi": {
+        "name": "Taibi El Yakouti",
+        "role": "Mobile/IME & Product Lead"
+      },
+      "mohammed": {
+        "name": "Mohammed-Ali EL MADANI",
+        "role": "AI & Backend Engineer"
+      },
+      "kawtar": {
+        "name": "EL GADDI Kawtar",
+        "role": "UI/UX Designer"
+      },
+      "aya": {
+        "name": "Aya HASSOUNE",
+        "role": "Storytelling & Pitch"
+      }
+    }
+  },
+  "faq": {
+    "label": "Support",
+    "title": "Frequently Asked Questions",
+    "subtitle": "Got questions? We've got answers",
+    "items": {
+      "q1": {
+        "question": "Is KeyCare free to use?",
+        "answer": "Yes! KeyCare is completely free during the beta period. We may introduce premium features in the future, but core functionality will always remain free."
+      },
+      "q2": {
+        "question": "Does KeyCare read my messages?",
+        "answer": "KeyCare analyzes text locally on your device to detect potential harm. We never store, transmit, or share your messages. Your privacy is our top priority."
+      },
+      "q3": {
+        "question": "What languages are supported?",
+        "answer": "KeyCare currently supports English, French, and Arabic with full keyboard layouts and AI detection for each language."
+      },
+      "q4": {
+        "question": "Does it work offline?",
+        "answer": "Yes! Core detection features work offline. For the most accurate AI suggestions, an internet connection is recommended but not required."
+      },
+      "q5": {
+        "question": "How do I install the APK?",
+        "answer": "Download the APK, open it on your Android device, and follow the prompts. You may need to enable 'Install from unknown sources' in your device settings."
+      },
+      "q6": {
+        "question": "Is there an iOS version?",
+        "answer": "Currently, KeyCare is only available for Android. An iOS version is on our roadmap for future development."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Type safely. Communicate mindfully.",
+    "links": "Quick Links",
+    "contact": "Contact",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "betaNote": "KeyCare is currently in beta. Features and availability may change.",
+    "copyright": "© 2026 KeyCare. All rights reserved."
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "content": "KeyCare is committed to protecting your privacy. All text analysis happens on your device. We do not collect, store, or share your messages."
+  }
+}
