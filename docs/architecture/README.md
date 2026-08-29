@@ -1,189 +1,34 @@
-# KeyCare-Gemini3 Architecture
+# KeyCare Architecture
 
-## System Overview
+KeyCare currently combines three maintained surfaces:
 
-KeyCare-Gemini3 is a real-time AI communication mediation system consisting of three main components:
+1. The Android IME captures text and presents risk and rewrite suggestions.
+2. The FastAPI backend validates requests, mediates messages through its configured AI provider, and returns structured results.
+3. The Vite/React web experience presents the public product and download experience.
 
-```
-┌────────────────────────────────────────────────────────────────────┐
-│                         USER'S ANDROID DEVICE                       │
-├────────────────────────────────────────────────────────────────────┤
-│                                                                     │
-│  ┌─────────────┐      ┌─────────────────────────────────────────┐  │
-│  │   Any App   │      │           KeyCare IME                    │  │
-│  │  (WhatsApp, │◀────▶│  ┌─────────────────────────────────┐    │  │
-│  │  Messages,  │      │  │  Text Input Field               │    │  │
-│  │   etc.)     │      │  └─────────────────────────────────┘    │  │
-│  └─────────────┘      │  ┌─────────────────────────────────┐    │  │
-│                       │  │  Mediation Suggestion UI        │    │  │
-│                       │  │  [Risk: ⚠️] [Accept] [Dismiss]   │    │  │
-│                       │  └─────────────────────────────────┘    │  │
-│                       └──────────────────┬──────────────────────┘  │
-│                                          │                          │
-└──────────────────────────────────────────┼──────────────────────────┘
-                                           │
-                                           │ HTTPS POST /mediate
-                                           │ {text, tone, lang_hint}
-                                           ▼
-┌────────────────────────────────────────────────────────────────────┐
-│                         BACKEND SERVER                              │
-├────────────────────────────────────────────────────────────────────┤
-│                                                                     │
-│  ┌─────────────────────────────────────────────────────────────┐   │
-│  │                     FastAPI Application                      │   │
-│  │                                                              │   │
-│  │  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐   │   │
-│  │  │   /health    │    │   /mediate   │    │  Middleware  │   │   │
-│  │  │   endpoint   │    │   endpoint   │    │  (CORS,Rate) │   │   │
-│  │  └──────────────┘    └──────┬───────┘    └──────────────┘   │   │
-│  │                             │                                │   │
-│  │                             ▼                                │   │
-│  │  ┌──────────────────────────────────────────────────────┐   │   │
-│  │  │            Gemini Mediation Service                   │   │   │
-│  │  │  - Build structured prompt                            │   │   │
-│  │  │  - Call Gemini 3 API                                  │   │   │
-│  │  │  - Parse JSON response                                │   │   │
-│  │  └──────────────────────────────────────────────────────┘   │   │
-│  │                             │                                │   │
-│  └─────────────────────────────┼────────────────────────────────┘   │
-│                                │                                    │
-└────────────────────────────────┼────────────────────────────────────┘
-                                 │
-                                 │ Gemini API Call
-                                 │ (Structured Output)
-                                 ▼
-┌────────────────────────────────────────────────────────────────────┐
-│                         GOOGLE GEMINI 3                             │
-├────────────────────────────────────────────────────────────────────┤
-│                                                                     │
-│  ┌─────────────────────────────────────────────────────────────┐   │
-│  │                    Gemini 3 Pro Model                        │   │
-│  │                                                              │   │
-│  │  Input:                                                      │   │
-│  │  - System prompt (mediator instructions)                     │   │
-│  │  - User message to analyze                                   │   │
-│  │  - Tone preference                                           │   │
-│  │  - Language hint                                             │   │
-│  │                                                              │   │
-│  │  Output (JSON):                                              │   │
-│  │  {                                                           │   │
-│  │    "risk_level": "safe|harmful|dangerous",                   │   │
-│  │    "why": "Brief explanation",                               │   │
-│  │    "rewrite": "Respectful version",                          │   │
-│  │    "language": "en|fr|ar|darija"                             │   │
-│  │  }                                                           │   │
-│  └─────────────────────────────────────────────────────────────┘   │
-│                                                                     │
-└────────────────────────────────────────────────────────────────────┘
+The planned browser extension is intentionally not implemented on `main` yet.
+
+## Runtime flow
+
+```text
+Android keyboard or future browser extension
+                  |
+                  | POST /mediate
+                  v
+            FastAPI backend
+                  |
+                  | configured provider request
+                  v
+              AI provider
 ```
 
-## Component Details
+The backend response contract includes a risk level, explanation, rewrite, detected language, and whether a fresh provider call was used. Clients should handle timeouts and fallback responses without blocking normal text entry.
 
-### 1. Android IME (Input Method Editor)
+## Boundaries
 
-**Location:** `android-ime/`
+- Provider credentials belong in environment variables and must never reach client applications.
+- Android release signing material belongs outside Git and should be supplied locally or by CI.
+- Generated output (`build/`, `dist/`, APK/AAB files, caches, and dependencies) is not source code and stays ignored.
+- Contract changes require coordination across AI Engine, Android Keyboard, Browser Extension, and Integration & Demo workstreams.
 
-**Responsibilities:**
-- Capture user text input in real-time
-- Display suggestion UI when mediation is available
-- Allow user to accept or dismiss rewrites
-- Handle keyboard functionality (typing, backspace, etc.)
-
-**Key Features:**
-- Non-blocking UI (mediation happens in background)
-- Visual risk indicators (green/yellow/red)
-- One-tap accept/dismiss
-
-### 2. Backend API (FastAPI)
-
-**Location:** `backend-api/`
-
-**Responsibilities:**
-- Receive text analysis requests
-- Build structured prompts for Gemini 3
-- Parse and validate Gemini responses
-- Return clean JSON to the client
-
-**Endpoints:**
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/health` | GET | Health check |
-| `/mediate` | POST | Analyze and rewrite text |
-
-**Security:**
-- API key stored in environment variables
-- CORS configured for allowed origins
-- Rate limiting (optional)
-
-### 3. Gemini 3 Integration
-
-**Purpose:** Provide intelligent communication analysis
-
-**Capabilities Used:**
-- **Structured Output:** JSON schema enforcement for reliable parsing
-- **Multilingual Understanding:** EN/FR/AR/Darija support
-- **Tone Analysis:** Detect harmful, aggressive, or dangerous language
-- **Creative Rewriting:** Transform messages while preserving intent
-
-## Data Flow
-
-```
-1. User types: "You're such an idiot!"
-                    │
-                    ▼
-2. IME captures text and sends to backend
-                    │
-                    ▼
-3. Backend builds prompt:
-   "Analyze this message for communication risk..."
-                    │
-                    ▼
-4. Gemini 3 returns:
-   {
-     "risk_level": "harmful",
-     "why": "Contains personal insult",
-     "rewrite": "I'm frustrated with this situation",
-     "language": "en"
-   }
-                    │
-                    ▼
-5. Backend returns response to IME
-                    │
-                    ▼
-6. IME shows suggestion UI:
-   ┌─────────────────────────────────────┐
-   │ ⚠️ Harmful: Contains personal insult │
-   │                                      │
-   │ Suggested: "I'm frustrated with..."  │
-   │                                      │
-   │     [Accept]        [Dismiss]        │
-   └─────────────────────────────────────┘
-                    │
-                    ▼
-7. User chooses Accept → Rewrites message
-   User chooses Dismiss → Keeps original
-```
-
-## Multilingual Support
-
-| Code | Language | Notes |
-|------|----------|-------|
-| `en` | English | Default |
-| `fr` | French | Full support |
-| `ar` | Arabic (MSA) | RTL support |
-| `darija` | Moroccan Arabic | Dialect awareness |
-
-## Security Considerations
-
-1. **No Secrets in Code:** All API keys use environment variables
-2. **HTTPS Only:** All API calls use encrypted connections
-3. **No Message Storage:** Messages are processed and discarded
-4. **User Control:** Users can disable mediation at any time
-
-## Future Enhancements
-
-- [ ] On-device ML model for faster inference
-- [ ] Custom tone profiles
-- [ ] Learning from user preferences
-- [ ] Browser extension version
-- [ ] iOS keyboard support
+Built with Codex.
