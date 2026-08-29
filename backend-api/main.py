@@ -13,9 +13,17 @@ import hashlib
 import time
 from typing import Literal
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
+from transform_service import (
+    GeminiTransformProvider,
+    ProviderUnavailableError,
+    SUPPORTED_LANGUAGES,
+    TransformService,
+)
 
 # Load environment variables
 load_dotenv()
@@ -34,6 +42,7 @@ GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3")
 ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
 DEBUG = os.getenv("DEBUG", "false").lower() == "true"
 VERSION = "1.4.0"
+MAX_TRANSFORM_TEXT_LENGTH = 4000
 
 # ============================================
 # In-Memory TTL Cache (5 minutes)
@@ -156,6 +165,69 @@ class HealthResponse(BaseModel):
     gemini_configured: bool
     gemini_model: str
     cache_size: int
+
+
+class TransformRequest(BaseModel):
+    """Shared request body for every KeyCare product surface."""
+
+    text: str = Field(..., max_length=MAX_TRANSFORM_TEXT_LENGTH)
+    action: Literal[
+        "improve", "professional", "translate", "calm", "respectful", "analyze"
+    ]
+    target_language: Literal["ar", "darija", "fr", "en"] | None = None
+
+
+class TransformAnalysis(BaseModel):
+    detected_languages: list[str]
+    code_switched: bool
+    arabizi: bool
+    tone: str
+
+
+class TransformMeta(BaseModel):
+    action: str
+    target_language: str | None
+
+
+class TransformResponse(BaseModel):
+    result: str
+    analysis: TransformAnalysis
+    meta: TransformMeta
+
+
+transform_service = TransformService(
+    GeminiTransformProvider(api_key=GEMINI_API_KEY, model=GEMINI_MODEL)
+)
+
+
+def error_response(
+    status_code: int,
+    code: str,
+    message: str,
+    fields: dict[str, str] | None = None,
+) -> JSONResponse:
+    return JSONResponse(
+        status_code=status_code,
+        content={
+            "error": {
+                "code": code,
+                "message": message,
+                "fields": fields or {},
+            }
+        },
+    )
+
+
+@app.exception_handler(RequestValidationError)
+async def request_validation_error_handler(
+    request: Request, exc: RequestValidationError
+) -> JSONResponse:
+    fields: dict[str, str] = {}
+    for error in exc.errors():
+        location = error.get("loc", ())
+        field = str(location[-1]) if location else "request"
+        fields[field] = "Invalid value."
+    return error_response(422, "validation_error", "The request is invalid.", fields)
 
 
 # ============================================
@@ -704,6 +776,58 @@ async def mediate_message(request: MediationRequest):
             rewrite="I'd like to express my thoughts respectfully.",
             language="en",
             gemini_used=False
+        )
+
+
+@app.post(
+    "/api/v1/transform",
+    response_model=TransformResponse,
+    tags=["Transform"],
+)
+async def transform_message(request: TransformRequest):
+    """Transform or analyze a message without storing it."""
+    text = request.text.strip()
+    if not text:
+        return error_response(
+            422,
+            "empty_text",
+            "Text must not be empty.",
+            {"text": "Enter a message to continue."},
+        )
+    if request.action == "translate" and request.target_language is None:
+        return error_response(
+            422,
+            "validation_error",
+            "The request is invalid.",
+            {"target_language": "Target language is required for translation."},
+        )
+    if request.target_language and request.target_language not in SUPPORTED_LANGUAGES:
+        return error_response(
+            422,
+            "validation_error",
+            "The request is invalid.",
+            {"target_language": "Unsupported target language."},
+        )
+
+    try:
+        return await transform_service.transform(
+            text=request.text,
+            action=request.action,
+            target_language=request.target_language,
+        )
+    except ProviderUnavailableError:
+        logger.warning("Transform provider unavailable")
+        return error_response(
+            503,
+            "provider_unavailable",
+            "KeyCare could not process this message right now. Please try again.",
+        )
+    except Exception:
+        logger.exception("Unexpected transform error")
+        return error_response(
+            500,
+            "internal_error",
+            "KeyCare encountered an unexpected error.",
         )
 
 
