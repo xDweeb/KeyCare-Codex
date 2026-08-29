@@ -2,7 +2,7 @@
 
 All work branches start from the latest stable `main`. Each member owns the quality and documentation of their workstream, keeps pull requests focused, and coordinates contract changes before merging.
 
-## Member 1 — Core AI + Backend + Android
+## Taibi El Yakouti — Core AI + Backend + Android
 
 Branch: `feat/core-ai-android`
 
@@ -12,7 +12,7 @@ Branch: `feat/core-ai-android`
 - Keep credentials and Android signing material outside Git.
 - Coordinate API contract changes with the browser extension, web app, and demo owner.
 
-## Member 2 — Browser Extension
+## Oumaima El Badraouy — Browser Extension
 
 Branch: `feat/browser-extension`
 
@@ -22,7 +22,7 @@ Branch: `feat/browser-extension`
 - Maintain extension packaging instructions, browser compatibility notes, and focused tests.
 - Coordinate shared UX and branding with the web app owner.
 
-## Member 3 — Web App
+## Anas Serghini — Web App
 
 Branch: `feat/web-app`
 
@@ -32,7 +32,7 @@ Branch: `feat/web-app`
 - Maintain web development, deployment, and content documentation.
 - Coordinate product messaging with the demo and presentation owners.
 
-## Member 4 — Demo + QA + Product
+## Soukaina El Fajjaj — Product + Demo + QA
 
 Branch: `feat/demo-qa`
 
@@ -42,12 +42,15 @@ Branch: `feat/demo-qa`
 - Track cross-workstream dependencies, risks, and release readiness.
 - Confirm that the demonstrated behavior matches product and privacy claims.
 
-## Member 5 — Presentation + Pitch + Story
+## Fatima Ezzahra El Fajjaj — Presentation + Pitch + Story + Visual Theme
 
 Branch: `feat/pitch-story`
 
-- Own the product narrative, problem statement, value proposition, and presentation structure.
-- Prepare the pitch deck, speaking notes, demo narration, and anticipated Q&A.
+- Own the presentation visual identity and theme, ensuring consistency between KeyCare product branding and the presentation.
+- Define the slide structure and create clear architecture and product visuals.
+- Own the storytelling, product narrative, problem statement, and value proposition.
+- Prepare the pitch script, speaking notes, and demo narration.
+- Prepare the team for jury Q&A with anticipated questions and accurate answers.
 - Keep screenshots, metrics, product claims, and technical descriptions accurate and current.
 - Coordinate the presentation flow with the Demo + QA + Product owner.
 - Maintain reusable communication assets without committing generated exports unnecessarily.
