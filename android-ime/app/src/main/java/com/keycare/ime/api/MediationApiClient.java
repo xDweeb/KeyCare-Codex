@@ -1,5 +1,7 @@
 package com.keycare.ime.api;
 
+import com.keycare.ime.ApiConfig;
+
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -38,7 +40,7 @@ public class MediationApiClient {
     private static final String TAG = "KEYCARE_MEDIATION";
     
     // API Configuration - Heroku backend (handles Gemini API calls server-side)
-    private static final String BASE_URL = "https://keycare-gemini3-api-2587283546dc.herokuapp.com";
+    private static final String BASE_URL = ApiConfig.BASE_URL;
     private static final String ENDPOINT_MEDIATE = "/mediate";
     
     // Timeouts (Gemini can take time to respond)

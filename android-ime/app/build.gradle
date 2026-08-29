@@ -12,6 +12,7 @@ android {
         targetSdk 35
         versionCode 2
         versionName "1.0.1"
+        buildConfigField "String", "KEYCARE_API_BASE_URL", '"https://keycare-codex-api-ef6679e530e7.herokuapp.com"'
     }
     
     // BuildConfig for API configuration (internal only)

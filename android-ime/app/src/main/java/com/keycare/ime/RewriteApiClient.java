@@ -4,7 +4,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -22,7 +21,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * RewriteApiClient - Handles API calls to /rewrite endpoint.
+ * RewriteApiClient - Handles shared KeyCare /api/v1/transform calls.
  * Features:
  * - Async API calls with callbacks (NO main thread blocking)
  * - Timeout handling with configurable timeouts
@@ -97,14 +96,15 @@ public class RewriteApiClient {
      * Falls back to local suggestions on failure.
      * SAFE: All operations run off main thread, callbacks run on main thread.
      */
-    public void requestRewrite(String text, String lang, String tone, 
+    public void requestRewrite(String text, String lang, String action,
+                               String targetLanguage,
                                String riskLabel, double riskScore,
                                RewriteCallback callback) {
         // Cancel any existing request
         cancelCurrentRequest();
         isCancelled.set(false);
         
-        Log.d(TAG, "Requesting rewrite - text length: " + text.length() + ", lang: " + lang + ", tone: " + tone);
+        Log.d(TAG, "Requesting transform - text length: " + text.length() + ", action: " + action);
 
         currentTask = executor.submit(() -> {
             try {
@@ -125,7 +125,7 @@ public class RewriteApiClient {
                     
                     try {
                         Log.d(TAG_API, "API attempt " + (attempt + 1));
-                        suggestions = callRewriteApi(text, lang, tone, riskLabel, riskScore);
+                        suggestions = callRewriteApi(text, action, targetLanguage);
                         break; // Success, exit retry loop
                     } catch (Exception e) {
                         lastError = e;
@@ -162,7 +162,7 @@ public class RewriteApiClient {
                     // Fallback to local suggestions
                     Log.d(TAG, "Using fallback suggestions due to: " + 
                           (lastError != null ? lastError.getMessage() : "empty response"));
-                    List<Suggestion> fallback = generateFallbackSuggestions(text, lang, tone);
+                    List<Suggestion> fallback = generateFallbackSuggestions(text, lang, action);
                     String errorMsg = getErrorMessage(lastError);
                     
                     mainHandler.post(() -> {
@@ -178,7 +178,7 @@ public class RewriteApiClient {
                 Log.e(TAG, "Unexpected error in rewrite request: " + e.getMessage(), e);
                 
                 if (!isCancelled.get()) {
-                    List<Suggestion> fallback = generateFallbackSuggestions(text, lang, tone);
+                    List<Suggestion> fallback = generateFallbackSuggestions(text, lang, action);
                     mainHandler.post(() -> {
                         try {
                             callback.onError("Unexpected error", fallback);
@@ -219,12 +219,12 @@ public class RewriteApiClient {
     }
 
     /**
-     * Make actual API call to /rewrite
+     * Make an actual shared transform API call.
      * NEVER called on main thread.
      */
-    private List<Suggestion> callRewriteApi(String text, String lang, String tone,
-                                            String riskLabel, double riskScore) throws Exception {
-        String urlStr = ApiConfig.BASE_URL + ApiConfig.ENDPOINT_REWRITE;
+    private List<Suggestion> callRewriteApi(String text, String action,
+                                            String targetLanguage) throws Exception {
+        String urlStr = ApiConfig.BASE_URL + ApiConfig.ENDPOINT_TRANSFORM;
         Log.d(TAG_API, "Calling API: " + urlStr);
         
         URL url = new URL(urlStr);
@@ -240,12 +240,12 @@ public class RewriteApiClient {
             // Build request JSON
             JSONObject json = new JSONObject();
             json.put("text", text);
-            json.put("lang", lang);
-            json.put("tone", tone);
-            json.put("risk_label", riskLabel);
-            json.put("risk_score", riskScore);
+            json.put("action", action);
+            if (targetLanguage != null && !targetLanguage.isEmpty()) {
+                json.put("target_language", targetLanguage);
+            }
             
-            Log.d(TAG_API, "Request payload: text_len=" + text.length() + ", lang=" + lang + ", tone=" + tone);
+            Log.d(TAG_API, "Request payload: text_len=" + text.length() + ", action=" + action);
 
             // Send request
             try (OutputStream os = conn.getOutputStream()) {
@@ -286,18 +286,19 @@ public class RewriteApiClient {
         try {
             JSONObject json = new JSONObject(jsonStr);
 
-            if (json.has("suggestions")) {
-                JSONArray arr = json.getJSONArray("suggestions");
-                Log.d(TAG_API, "Parsing " + arr.length() + " suggestions from response");
-                
-                for (int i = 0; i < arr.length(); i++) {
-                    JSONObject item = arr.getJSONObject(i);
-                    String text = item.optString("text", "");
-                    String reason = item.optString("reason", null);
-                    if (!text.isEmpty()) {
-                        suggestions.add(new Suggestion(text, reason));
-                    }
+            String result = json.optString("result", "");
+            if (!result.isEmpty()) {
+                JSONObject analysis = json.optJSONObject("analysis");
+                String reason = null;
+                if (analysis != null) {
+                    String tone = analysis.optString("tone", "uncertain");
+                    boolean codeSwitched = analysis.optBoolean("code_switched", false);
+                    boolean arabizi = analysis.optBoolean("arabizi", false);
+                    reason = "Tone: " + tone;
+                    if (codeSwitched) reason += " • code-switched";
+                    if (arabizi) reason += " • Arabizi";
                 }
+                suggestions.add(new Suggestion(result, reason, "keycare-api"));
             }
         } catch (Exception e) {
             Log.e(TAG_API, "Error parsing response: " + e.getMessage());
