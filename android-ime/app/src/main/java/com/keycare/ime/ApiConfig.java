@@ -25,6 +25,7 @@ public final class ApiConfig {
      */
     public static final String ENDPOINT_HEALTH = "/health";
     public static final String ENDPOINT_MEDIATE = "/mediate";
+    public static final String ENDPOINT_TRANSFORM = "/api/v1/transform";
     public static final String ENDPOINT_DETECT = "/mediate";  // Legacy alias
     public static final String ENDPOINT_REWRITE = "/mediate"; // Legacy alias
     

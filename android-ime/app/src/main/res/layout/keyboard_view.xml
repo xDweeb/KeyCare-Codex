@@ -101,6 +101,19 @@
             android:layout_height="1dp"
             android:layout_weight="1"/>
 
+        <Button
+            android:id="@+id/keycareAiButton"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="KeyCare AI"
+            android:textAllCaps="false"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:textColor="#00E5C4"
+            android:background="@drawable/bg_toolbar_btn_premium"
+            android:paddingHorizontal="10dp"
+            android:contentDescription="KeyCare AI actions"/>
+
         <!-- Toolbar buttons - Premium -->
         <ImageButton
             android:id="@+id/btnEmoji"
