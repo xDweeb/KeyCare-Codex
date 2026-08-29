@@ -6,6 +6,7 @@ The public KeyCare experience and interactive hackathon MVP demo. It is built wi
 
 - Responsive public landing page with accessible keyboard and mobile navigation
 - English, French, and Arabic translations, including right-to-left layout
+- Responsive mobile-product walkthrough using the reviewed screenshots in `public/assets/screens/`
 - All six P0 actions from the shared contract: improve, professional, translate, calm, respectful, and tone check
 - Contract-compatible local demo responses when no backend is configured
 - Live `POST /api/v1/transform` integration when an API origin is configured
@@ -54,7 +55,8 @@ Before release, manually check:
 3. Keyboard navigation, visible focus, the mobile menu, and reduced motion.
 4. `/privacy` and `/terms` through the host's SPA fallback.
 5. Contact and Android download configuration.
-6. Network, timeout, validation, and backend provider error states.
+6. Mobile screenshots, translated captions, and horizontal swipe behavior on narrow screens.
+7. Network, timeout, validation, and backend provider error states.
 
 ## Deployment
 

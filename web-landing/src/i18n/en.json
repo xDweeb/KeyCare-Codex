@@ -2,7 +2,7 @@
   "meta": { "homeTitle": "KeyCare — Think before you send", "privacyTitle": "Privacy — KeyCare", "termsTitle": "MVP Terms — KeyCare", "description": "A Morocco-first AI communication layer for Darija, Arabic, French, English, Arabizi, and mixed-language messages." },
   "nav": {
     "home": "KeyCare home", "primary": "Primary navigation", "mobile": "Mobile navigation", "language": "Choose language",
-    "demo": "Try it", "features": "Capabilities", "privacy": "Privacy", "availability": "Availability", "contact": "Contact",
+    "demo": "Try it", "mobileApp": "Mobile app", "features": "Capabilities", "privacy": "Privacy", "availability": "Availability", "contact": "Contact",
     "openMenu": "Open navigation menu", "closeMenu": "Close navigation menu"
   },
   "hero": {
@@ -38,6 +38,16 @@
       "resilient": { "title": "Clear failure states", "description": "Validation, timeout, network, and provider errors keep the original text intact and explain what happened." },
       "shared": { "title": "One shared contract", "description": "The web, Android keyboard, and browser extension use the same versioned backend request and response shape." }
     }
+  },
+  "mobileShowcase": {
+    "eyebrow": "Mobile keyboard preview", "title": "KeyCare on mobile, step by step.", "subtitle": "Explore the current MVP journey from first welcome to a configured keyboard, with safer wording kept under the user's control.", "badge": "Current MVP interface", "galleryLabel": "KeyCare mobile interface screenshots",
+    "items": {
+      "welcome": { "title": "A clear first welcome", "description": "A focused introduction explains KeyCare's purpose before setup begins.", "alt": "KeyCare mobile welcome screen" },
+      "rewrite": { "title": "Compare before you choose", "description": "The original risk signal and safer alternative stay visually separate so the user makes the final decision.", "alt": "KeyCare mobile screen comparing risky and safer wording" },
+      "setup": { "title": "Guided keyboard setup", "description": "A short checklist explains how to enable KeyCare and grant the access required for its AI features.", "alt": "KeyCare mobile keyboard setup checklist" },
+      "ready": { "title": "Status and settings at a glance", "description": "The home state confirms setup and keeps testing and keyboard preferences easy to reach.", "alt": "KeyCare mobile ready and keyboard settings screen" }
+    },
+    "note": "These screenshots show the current MVP interface. Wording and setup steps may evolve before a reviewed mobile build is publicly linked."
   },
   "privacy": {
     "eyebrow": "Plain-language privacy", "title": "Your words remain yours.", "subtitle": "KeyCare is an assistive writing layer. It processes the text you explicitly submit, returns a result, and leaves the final choice with you.", "readPolicy": "Read the privacy notice",

@@ -2,7 +2,7 @@
   "meta": { "homeTitle": "KeyCare — Réfléchissez avant d’envoyer", "privacyTitle": "Confidentialité — KeyCare", "termsTitle": "Conditions du MVP — KeyCare", "description": "Une couche d’IA de communication pensée pour le Maroc, la darija, l’arabe, le français, l’anglais, l’arabizi et les messages multilingues." },
   "nav": {
     "home": "Accueil KeyCare", "primary": "Navigation principale", "mobile": "Navigation mobile", "language": "Choisir la langue",
-    "demo": "Essayer", "features": "Fonctions", "privacy": "Confidentialité", "availability": "Disponibilité", "contact": "Contact",
+    "demo": "Essayer", "mobileApp": "App mobile", "features": "Fonctions", "privacy": "Confidentialité", "availability": "Disponibilité", "contact": "Contact",
     "openMenu": "Ouvrir le menu de navigation", "closeMenu": "Fermer le menu de navigation"
   },
   "hero": {
@@ -38,6 +38,16 @@
       "resilient": { "title": "Erreurs clairement expliquées", "description": "Validation, délai, réseau ou fournisseur : le texte original est conservé et le problème est expliqué." },
       "shared": { "title": "Un contrat partagé", "description": "Le web, le clavier Android et l’extension utilisent la même structure versionnée de requête et de réponse backend." }
     }
+  },
+  "mobileShowcase": {
+    "eyebrow": "Aperçu du clavier mobile", "title": "KeyCare sur mobile, étape par étape.", "subtitle": "Découvrez le parcours actuel du MVP, du premier accueil au clavier configuré, avec une formulation plus sûre qui reste sous le contrôle de l’utilisateur.", "badge": "Interface actuelle du MVP", "galleryLabel": "Captures de l’interface mobile KeyCare",
+    "items": {
+      "welcome": { "title": "Un accueil clair", "description": "Une introduction ciblée explique l’objectif de KeyCare avant de commencer la configuration.", "alt": "Écran d’accueil mobile de KeyCare" },
+      "rewrite": { "title": "Comparer avant de choisir", "description": "Le signal de risque initial et l’alternative plus sûre restent séparés afin que l’utilisateur prenne la décision finale.", "alt": "Écran mobile KeyCare comparant une formulation risquée et une formulation plus sûre" },
+      "setup": { "title": "Configuration guidée du clavier", "description": "Une courte liste explique comment activer KeyCare et accorder les accès nécessaires aux fonctions d’IA.", "alt": "Liste de configuration du clavier mobile KeyCare" },
+      "ready": { "title": "État et réglages en un coup d’œil", "description": "L’accueil confirme la configuration et facilite l’accès au test et aux préférences du clavier.", "alt": "Écran mobile KeyCare prêt à l’emploi et réglages du clavier" }
+    },
+    "note": "Ces captures montrent l’interface actuelle du MVP. Les textes et étapes de configuration peuvent évoluer avant la publication d’un build mobile validé."
   },
   "privacy": {
     "eyebrow": "Confidentialité en langage clair", "title": "Vos mots restent les vôtres.", "subtitle": "KeyCare est une aide à l’écriture. Il traite le texte que vous soumettez explicitement, renvoie un résultat et vous laisse le choix final.", "readPolicy": "Lire la notice de confidentialité",

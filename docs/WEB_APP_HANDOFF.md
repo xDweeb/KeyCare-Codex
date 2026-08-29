@@ -13,6 +13,7 @@ Public claims deliberately distinguish current behavior:
 - The interactive web demo supports all six P0 actions.
 - Without `VITE_API_BASE_URL`, the demo uses local contract-compatible examples and clearly labels that state.
 - The Android APK is linked only when `VITE_ANDROID_DOWNLOAD_URL` points to a reviewed build.
+- The mobile walkthrough uses current MVP screenshots and labels them as interface previews whose wording and setup may evolve.
 - The browser extension is described as in development, not as a public store release.
 - Messages are not stored by default; text may be sent to the configured backend and its AI provider for the current request.
 - KeyCare never sends or inserts a suggestion automatically.
@@ -36,5 +37,6 @@ Before a demo or public release, confirm the following with the named workstream
 - Keyboard focus, mobile navigation, reduced motion, labels, error announcements, and color contrast are reviewed.
 - All external links and configured downloads resolve.
 - `/privacy` and `/terms` load both through navigation and direct URLs.
+- The four mobile screenshots render with translated captions and remain usable as a swipeable gallery on narrow screens.
 - The demo preserves the original text on validation, network, timeout, and provider failures.
 - No secret or provider credential appears in source, `.env.example`, or the client bundle.

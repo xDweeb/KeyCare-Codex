@@ -85,7 +85,7 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
   const languages = [{ code: 'en', label: 'EN' }, { code: 'fr', label: 'FR' }, { code: 'ar', label: 'ع' }];
-  const links = ['demo', 'features', 'privacy', 'availability', 'contact'];
+  const links = ['demo', 'mobileApp', 'features', 'privacy', 'availability', 'contact'];
 
   useEffect(() => {
     const closeOnEscape = (event: KeyboardEvent) => {
@@ -221,6 +221,42 @@ function FeatureSection() {
   </div></section>;
 }
 
+function MobileShowcase() {
+  const { t } = useTranslation();
+  const screens = [
+    { key: 'welcome', file: 'screen1.png' },
+    { key: 'rewrite', file: 'screen2.png' },
+    { key: 'setup', file: 'screen3.png' },
+    { key: 'ready', file: 'screen4.png' },
+  ];
+
+  return <section className="section mobile-showcase" id="mobileApp"><div className="shell">
+    <div className="section-heading split-heading mobile-heading">
+      <div><p className="eyebrow">{t('mobileShowcase.eyebrow')}</p><h2>{t('mobileShowcase.title')}</h2></div>
+      <div><p>{t('mobileShowcase.subtitle')}</p><span className="preview-badge">{t('mobileShowcase.badge')}</span></div>
+    </div>
+    <div className="mobile-screens" aria-label={t('mobileShowcase.galleryLabel')}>
+      {screens.map((screen, index) => <figure className="mobile-screen" key={screen.key}>
+        <div className="phone-frame">
+          <img
+            src={`${import.meta.env.BASE_URL}assets/screens/${screen.file}`}
+            alt={t(`mobileShowcase.items.${screen.key}.alt`)}
+            loading="lazy"
+            width="394"
+            height="853"
+          />
+        </div>
+        <figcaption>
+          <span>{String(index + 1).padStart(2, '0')}</span>
+          <h3>{t(`mobileShowcase.items.${screen.key}.title`)}</h3>
+          <p>{t(`mobileShowcase.items.${screen.key}.description`)}</p>
+        </figcaption>
+      </figure>)}
+    </div>
+    <p className="mobile-note">{t('mobileShowcase.note')}</p>
+  </div></section>;
+}
+
 function PrivacySection() {
   const { t } = useTranslation();
   const items = ['request', 'storage', 'control', 'credentials'];
@@ -271,7 +307,7 @@ function App() {
   }, [i18n.language, normalizedPath, t]);
   if (normalizedPath === '/privacy') return <LegalPage type="privacy" />;
   if (normalizedPath === '/terms') return <LegalPage type="terms" />;
-  return <div className="site"><a className="skip-link" href="#main-content">{t('common.skip')}</a><Header /><main id="main-content"><Hero /><ProductDemo /><FeatureSection /><PrivacySection /><AvailabilitySection /><ContactSection /></main><Footer /></div>;
+  return <div className="site"><a className="skip-link" href="#main-content">{t('common.skip')}</a><Header /><main id="main-content"><Hero /><ProductDemo /><MobileShowcase /><FeatureSection /><PrivacySection /><AvailabilitySection /><ContactSection /></main><Footer /></div>;
 }
 
 export default App;
