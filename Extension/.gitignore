@@ -1,0 +1,12 @@
+node_modules
+dist
+.DS_Store
+*.log
+.env.local
+.env.*.local
+.vite
+.idea
+.vscode/*
+!.vscode/extensions.json
+server/.env
+server/data
