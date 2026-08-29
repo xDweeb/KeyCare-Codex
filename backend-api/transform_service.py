@@ -105,6 +105,8 @@ Core behavior:
 - Understand mixed-language messages as a whole; never translate word by word.
 - Distinguish criticism of an idea or work from a personal attack using target, intent, and context—not a keyword blacklist.
 - Detect only languages actually present. Moroccan Latin-script words and Arabizi digits are Darija, not French. A clear borrowed word such as "design" may add english.
+- Treat recognizable French or English words inside a Darija sentence as code-switching, even when the surrounding grammar is Darija. For example, "wach n9dro ndecaliw meeting l vendredi?" contains Darija, French (ndecaliw/vendredi), and English (meeting).
+- Do not infer Arabic merely because Darija is present. Use arabic only for Modern Standard Arabic or non-Darija Arabic content; Latin-script Darija remains darija.
 - When calming an insult that contains no concrete complaint, express frustration or disagreement without inventing a specific grievance, event, or accusation.
 - The analysis object always describes the original user message before transformation, never the rewritten result.
 - For analyze, return the original input exactly and provide analysis only.
@@ -112,6 +114,7 @@ Core behavior:
 - tone is a short lowercase description such as neutral, friendly, professional, frustrated, critical, aggressive, or uncertain.
 - Example: "had design ma3jbnich khassna nbddlou" is Darija + English, Arabizi, and critical/frustrated criticism of work—not a personal attack.
 - Example: "nta 7mar maktfham walo" is Darija, Arabizi, and an aggressive personal attack. A calm rewrite must remove the insult without inventing why the speaker is upset.
+- Example: "slm monsieur ana maghadich n9dr nji demain hit 3ndi empechement" is Darija + French, not Arabic or English.
 - Return only the requested structured output."""
 
 

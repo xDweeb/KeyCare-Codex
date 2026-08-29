@@ -197,6 +197,8 @@ class OpenAIProviderTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("Arabizi", KEYCARE_INSTRUCTIONS)
         self.assertIn("code-switching", KEYCARE_INSTRUCTIONS)
         self.assertIn("criticism", KEYCARE_INSTRUCTIONS)
+        self.assertIn("ndecaliw/vendredi", KEYCARE_INSTRUCTIONS)
+        self.assertIn("not Arabic or English", KEYCARE_INSTRUCTIONS)
         self.assertFalse(TRANSFORM_OUTPUT_SCHEMA["additionalProperties"])
         self.assertEqual(
             set(TRANSFORM_OUTPUT_SCHEMA["required"]), {"result", "analysis"}
@@ -207,7 +209,5 @@ class OpenAIProviderTests(unittest.IsolatedAsyncioTestCase):
         attack = "nta 7mar maktfham walo"
         self.assertIn(criticism, build_openai_input(criticism, "analyze", None))
         self.assertIn(attack, build_openai_input(attack, "calm", None))
-
-
 if __name__ == "__main__":
     unittest.main()
