@@ -19,23 +19,11 @@ android {
         buildConfig true
     }
 
-    signingConfigs {
-        release {
-            // For Play Store, you'll need to replace these with your own keystore
-            // Generate one with: keytool -genkey -v -keystore keycare-release.keystore -alias keycare -keyalg RSA -keysize 2048 -validity 10000
-            storeFile file('keycare-release.keystore')
-            storePassword 'keycare2026'
-            keyAlias 'keycare'
-            keyPassword 'keycare2026'
-        }
-    }
-
     buildTypes {
         release {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
         debug {
             debuggable true
