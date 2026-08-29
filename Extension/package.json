@@ -1,0 +1,23 @@
+{
+  "name": "keycare-extension",
+  "version": "1.0.0",
+  "private": true,
+  "description": "KeyCare Chrome Extension — Think before you send. AI communication intelligence for Darija, Arabizi, Arabic, French, and English.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "node scripts/generate-icons.mjs && tsc --noEmit && vite build && node scripts/validate-build.mjs",
+    "preview": "vite preview",
+    "icons": "node scripts/generate-icons.mjs",
+    "typecheck": "tsc --noEmit",
+    "validate": "node scripts/validate-build.mjs"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@crxjs/vite-plugin": "^2.0.0",
+    "@types/chrome": "^0.0.287",
+    "pngjs": "^7.0.0",
+    "typescript": "^5.7.3",
+    "vite": "^5.4.14"
+  }
+}
