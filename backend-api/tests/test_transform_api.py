@@ -21,6 +21,7 @@ from transform_service import (  # noqa: E402
     TransformService,
     build_openai_input,
     extract_openai_output_text,
+    normalize_analysis,
 )
 
 
@@ -109,6 +110,34 @@ class TransformServiceContractTests(unittest.IsolatedAsyncioTestCase):
                 self.assertEqual(response["analysis"]["tone"], tone)
                 self.assertEqual(response["meta"]["action"], "analyze")
                 self.assertIsNone(response["meta"]["target_language"])
+
+    def test_language_metadata_removes_false_arabic_and_stays_consistent(self):
+        analysis = normalize_analysis(
+            {
+                "detected_languages": ["darija", "arabic", "darija"],
+                "code_switched": True,
+                "arabizi": True,
+                "tone": "aggressive",
+            },
+            "nta 7mar maktfham walo",
+        )
+
+        self.assertEqual(analysis["detected_languages"], ["darija"])
+        self.assertFalse(analysis["code_switched"])
+
+    def test_arabic_script_language_is_preserved(self):
+        analysis = normalize_analysis(
+            {
+                "detected_languages": ["darija", "arabic"],
+                "code_switched": False,
+                "arabizi": False,
+                "tone": "neutral",
+            },
+            "واش هذا واضح بالعربية",
+        )
+
+        self.assertEqual(analysis["detected_languages"], ["darija", "arabic"])
+        self.assertTrue(analysis["code_switched"])
 
     async def test_transform_actions_preserve_contract_metadata(self):
         service = TransformService(MoroccanFixtureProvider())

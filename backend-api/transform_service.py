@@ -321,15 +321,28 @@ def normalize_analysis(raw: Any, text: str) -> dict[str, Any]:
     languages = analysis.get("detected_languages", [])
     if not isinstance(languages, list):
         languages = []
-    languages = [str(language).lower() for language in languages if language]
+    languages = list(
+        dict.fromkeys(
+            str(language).lower()
+            for language in languages
+            if str(language).lower() in {"darija", "arabic", "french", "english"}
+        )
+    )
+
+    # Latin-script Moroccan text is Darija, not an additional Arabic language.
+    # Keep Arabic when the original message actually contains Arabic script.
+    if (
+        "darija" in languages
+        and "arabic" in languages
+        and not re.search(r"[\u0600-\u06ff]", text)
+    ):
+        languages.remove("arabic")
 
     arabizi = analysis.get("arabizi")
     if not isinstance(arabizi, bool):
         arabizi = bool(re.search(r"(?i)\b\w*[379]\w*\b", text))
 
-    code_switched = analysis.get("code_switched")
-    if not isinstance(code_switched, bool):
-        code_switched = len(set(languages)) > 1
+    code_switched = len(languages) > 1
 
     tone = analysis.get("tone")
     if not isinstance(tone, str) or not tone.strip():
