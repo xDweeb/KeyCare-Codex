@@ -106,7 +106,8 @@ legend, .target-field label { margin-bottom: 11px; color: #dfe8e5; font-size: .8
 .action-grid button:hover, .action-grid button.selected { border-color: var(--mint); color: #082219; background: var(--mint); }
 .target-field { margin-top: 18px; display: grid; gap: 8px; }
 select { min-height: 45px; padding: 0 12px; border: 1px solid var(--line); border-radius: 10px; color: var(--ink); background: #09130f; }
-.submit-button { width: 100%; margin-top: 20px; }
+.composer-actions { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-top: 20px; }
+.submit-button { width: 100%; }
 .demo-mode { margin: 15px 0 0; display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--muted); font-size: .7rem; text-align: center; }
 .demo-mode span { width: 7px; height: 7px; border-radius: 50%; }
 .demo-mode .live { background: var(--mint); box-shadow: 0 0 10px var(--mint); }
@@ -191,7 +192,7 @@ select { min-height: 45px; padding: 0 12px; border: 1px solid var(--line); borde
   .nav-wrap { min-height: 66px; }.brand span { font-size: 1rem; }.language-switcher button { min-width: 31px; padding-inline: 6px; }
   .hero { padding-block: 62px 70px; }.hero h1 { font-size: clamp(2.75rem, 15vw, 4.1rem); }.hero-lede { font-size: .98rem; }.hero-actions .button { width: 100%; }.signal-list { display: grid; }
   .hero-visual { min-height: 410px; border-radius: 25px; }.ai-card { width: 88%; padding: 20px; }.ai-card p { font-size: 1.05rem; }.message { font-size: .75rem; }.message-one { inset-inline-start: 18px; }.message-two { inset-inline-end: 18px; }
-  .section { padding-block: 78px; }.section-heading { margin-bottom: 34px; }.composer, .result-panel { padding: 22px; }.result-panel { min-height: 420px; }.action-grid { grid-template-columns: 1fr 1fr; }.analysis-grid { grid-template-columns: 1fr; }
+  .section { padding-block: 78px; }.section-heading { margin-bottom: 34px; }.composer, .result-panel { padding: 22px; }.result-panel { min-height: 420px; }.action-grid { grid-template-columns: 1fr 1fr; }.analysis-grid { grid-template-columns: 1fr; }.composer-actions { grid-template-columns: 1fr; }
   .feature-grid { grid-template-columns: 1fr; }.feature-card { min-height: 205px; }.feature-card h3 { margin-top: 32px; }
   .mobile-showcase .shell { width: 100%; }.mobile-heading, .mobile-note { width: calc(100% - 28px); margin-inline: auto; }.mobile-screens { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(245px, 82vw); gap: 16px; padding: 4px 14px 22px; overflow-x: auto; overscroll-behavior-inline: contain; scroll-snap-type: inline mandatory; scrollbar-width: thin; }.mobile-screen { scroll-snap-align: center; }.mobile-screen figcaption { padding-inline: 7px; }
   .privacy-list article { padding-inline: 5px; }.contact-card { padding: 30px; display: grid; }.contact-card .button { width: 100%; }
