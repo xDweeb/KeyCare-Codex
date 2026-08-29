@@ -95,6 +95,119 @@ class GeminiTransformProvider:
         return result
 
 
+KEYCARE_INSTRUCTIONS = """You are KeyCare, a Morocco-first AI communication layer.
+
+You understand the complete semantic meaning of Moroccan communication written in Darija, Arabic-script Darija, Latin Darija, Arabizi using digits such as 3/7/9, French, Arabic, English, and code-switching between them.
+
+Core behavior:
+- Preserve the user's intended meaning, facts, boundaries, and level of certainty.
+- Never censor, moralize, add claims, or imply that KeyCare sends messages.
+- Understand mixed-language messages as a whole; never translate word by word.
+- Distinguish criticism of an idea or work from a personal attack using target, intent, and context—not a keyword blacklist.
+- Detect only languages actually present. Moroccan Latin-script words and Arabizi digits are Darija, not French. A clear borrowed word such as "design" may add english.
+- When calming an insult that contains no concrete complaint, express frustration or disagreement without inventing a specific grievance, event, or accusation.
+- The analysis object always describes the original user message before transformation, never the rewritten result.
+- For analyze, return the original input exactly and provide analysis only.
+- detected_languages uses only: darija, arabic, french, english.
+- tone is a short lowercase description such as neutral, friendly, professional, frustrated, critical, aggressive, or uncertain.
+- Example: "had design ma3jbnich khassna nbddlou" is Darija + English, Arabizi, and critical/frustrated criticism of work—not a personal attack.
+- Example: "nta 7mar maktfham walo" is Darija, Arabizi, and an aggressive personal attack. A calm rewrite must remove the insult without inventing why the speaker is upset.
+- Return only the requested structured output."""
+
+
+TRANSFORM_OUTPUT_SCHEMA = {
+    "type": "object",
+    "additionalProperties": False,
+    "properties": {
+        "result": {"type": "string"},
+        "analysis": {
+            "type": "object",
+            "additionalProperties": False,
+            "properties": {
+                "detected_languages": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": ["darija", "arabic", "french", "english"],
+                    },
+                },
+                "code_switched": {"type": "boolean"},
+                "arabizi": {"type": "boolean"},
+                "tone": {"type": "string"},
+            },
+            "required": [
+                "detected_languages",
+                "code_switched",
+                "arabizi",
+                "tone",
+            ],
+        },
+    },
+    "required": ["result", "analysis"],
+}
+
+
+@dataclass
+class OpenAITransformProvider:
+    """OpenAI Responses API adapter with strict, non-persistent output."""
+
+    api_key: str
+    model: str
+    timeout_seconds: float = 20.0
+
+    async def transform(
+        self, text: str, action: str, target_language: str | None
+    ) -> dict[str, Any]:
+        if not self.api_key:
+            raise ProviderUnavailableError("AI provider is not configured")
+
+        payload = {
+            "model": self.model,
+            "store": False,
+            "instructions": KEYCARE_INSTRUCTIONS,
+            "input": build_openai_input(text, action, target_language),
+            "max_output_tokens": 1200,
+            "reasoning": {"effort": "minimal"},
+            "text": {
+                "format": {
+                    "type": "json_schema",
+                    "name": "keycare_transform",
+                    "strict": True,
+                    "schema": TRANSFORM_OUTPUT_SCHEMA,
+                }
+            },
+        }
+
+        try:
+            async with httpx.AsyncClient(timeout=self.timeout_seconds) as client:
+                response = await client.post(
+                    "https://api.openai.com/v1/responses",
+                    json=payload,
+                    headers={
+                        "Authorization": f"Bearer {self.api_key}",
+                        "Content-Type": "application/json; charset=utf-8",
+                    },
+                )
+        except (httpx.TimeoutException, httpx.NetworkError) as exc:
+            raise ProviderUnavailableError("AI provider request failed") from exc
+
+        if response.status_code != 200:
+            # Status is useful operationally; response bodies can contain provider detail.
+            logger.warning("OpenAI provider returned status %s", response.status_code)
+            raise ProviderUnavailableError("AI provider rejected the request")
+
+        try:
+            response_data = response.json()
+            output_text = extract_openai_output_text(response_data)
+            result = json.loads(output_text)
+        except (TypeError, ValueError, json.JSONDecodeError) as exc:
+            raise ProviderUnavailableError("AI provider returned an invalid response") from exc
+
+        if not isinstance(result, dict) or not isinstance(result.get("result"), str):
+            raise ProviderUnavailableError("AI provider returned an incomplete response")
+        return result
+
+
 class TransformService:
     """Stable application service shared by every KeyCare client."""
 
@@ -159,6 +272,37 @@ Rules:
 
 Message:
 {text}"""
+
+
+def build_openai_input(text: str, action: str, target_language: str | None) -> str:
+    action_instructions = {
+        "improve": "Improve clarity and quality while preserving meaning and language style when appropriate.",
+        "professional": "Turn the message into natural professional communication.",
+        "translate": f"Translate naturally to {target_language} after understanding the full mixed-language meaning.",
+        "calm": "Reduce aggression or emotional intensity while preserving the user's point.",
+        "respectful": "Express the same intent more respectfully without weakening it.",
+        "analyze": "Analyze communication without rewriting; result must exactly equal the input.",
+    }
+    return (
+        f"Action: {action}\n"
+        f"Target language: {target_language or 'none'}\n"
+        f"Action requirement: {action_instructions[action]}\n\n"
+        f"User message:\n{text}"
+    )
+
+
+def extract_openai_output_text(response_data: dict[str, Any]) -> str:
+    for output_item in response_data.get("output", []):
+        if not isinstance(output_item, dict) or output_item.get("type") != "message":
+            continue
+        for content_item in output_item.get("content", []):
+            if (
+                isinstance(content_item, dict)
+                and content_item.get("type") == "output_text"
+                and isinstance(content_item.get("text"), str)
+            ):
+                return content_item["text"]
+    raise ValueError("Responses API output did not contain output text")
 
 
 def parse_provider_json(response_text: str) -> dict[str, Any]:

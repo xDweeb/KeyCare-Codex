@@ -19,7 +19,7 @@ from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from transform_service import (
-    GeminiTransformProvider,
+    OpenAITransformProvider,
     ProviderUnavailableError,
     SUPPORTED_LANGUAGES,
     TransformService,
@@ -39,6 +39,8 @@ logger = logging.getLogger("keycare")
 # ============================================
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-5-mini")
 ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
 DEBUG = os.getenv("DEBUG", "false").lower() == "true"
 VERSION = "1.4.0"
@@ -165,6 +167,9 @@ class HealthResponse(BaseModel):
     gemini_configured: bool
     gemini_model: str
     cache_size: int
+    transform_provider: str
+    transform_configured: bool
+    transform_model: str
 
 
 class TransformRequest(BaseModel):
@@ -196,7 +201,7 @@ class TransformResponse(BaseModel):
 
 
 transform_service = TransformService(
-    GeminiTransformProvider(api_key=GEMINI_API_KEY, model=GEMINI_MODEL)
+    OpenAITransformProvider(api_key=OPENAI_API_KEY, model=OPENAI_MODEL)
 )
 
 
@@ -737,7 +742,10 @@ async def health_check():
         version=VERSION,
         gemini_configured=bool(GEMINI_API_KEY),
         gemini_model=GEMINI_MODEL,
-        cache_size=len(_response_cache)
+        cache_size=len(_response_cache),
+        transform_provider="openai",
+        transform_configured=bool(OPENAI_API_KEY),
+        transform_model=OPENAI_MODEL,
     )
 
 

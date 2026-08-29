@@ -13,7 +13,15 @@ BACKEND_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(BACKEND_DIR))
 
 import main  # noqa: E402
-from transform_service import ProviderUnavailableError, TransformService  # noqa: E402
+from transform_service import (  # noqa: E402
+    KEYCARE_INSTRUCTIONS,
+    OpenAITransformProvider,
+    ProviderUnavailableError,
+    TRANSFORM_OUTPUT_SCHEMA,
+    TransformService,
+    build_openai_input,
+    extract_openai_output_text,
+)
 
 
 MOROCCAN_CASES = [
@@ -157,6 +165,48 @@ class TransformEndpointErrorTests(unittest.TestCase):
         body = self.response_json(response)
         self.assertEqual(body["error"]["code"], "provider_unavailable")
         self.assertNotIn("test provider unavailable", response.body.decode("utf-8"))
+
+
+class OpenAIProviderTests(unittest.IsolatedAsyncioTestCase):
+    async def test_missing_key_fails_without_network_request(self):
+        provider = OpenAITransformProvider(api_key="", model="gpt-5-mini")
+        with self.assertRaises(ProviderUnavailableError):
+            await provider.transform("salam", "improve", None)
+
+    def test_responses_output_text_is_extracted_by_type(self):
+        response = {
+            "output": [
+                {"type": "reasoning", "content": []},
+                {
+                    "type": "message",
+                    "content": [
+                        {
+                            "type": "output_text",
+                            "text": '{"result":"salam","analysis":{}}',
+                        }
+                    ],
+                },
+            ]
+        }
+        self.assertEqual(
+            extract_openai_output_text(response),
+            '{"result":"salam","analysis":{}}',
+        )
+
+    def test_instruction_and_schema_encode_morocco_first_contract(self):
+        self.assertIn("Arabizi", KEYCARE_INSTRUCTIONS)
+        self.assertIn("code-switching", KEYCARE_INSTRUCTIONS)
+        self.assertIn("criticism", KEYCARE_INSTRUCTIONS)
+        self.assertFalse(TRANSFORM_OUTPUT_SCHEMA["additionalProperties"])
+        self.assertEqual(
+            set(TRANSFORM_OUTPUT_SCHEMA["required"]), {"result", "analysis"}
+        )
+
+    def test_action_input_preserves_complete_user_message(self):
+        criticism = "had design ma3jbnich khassna nbddlou"
+        attack = "nta 7mar maktfham walo"
+        self.assertIn(criticism, build_openai_input(criticism, "analyze", None))
+        self.assertIn(attack, build_openai_input(attack, "calm", None))
 
 
 if __name__ == "__main__":
