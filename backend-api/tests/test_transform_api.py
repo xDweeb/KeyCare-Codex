@@ -209,5 +209,19 @@ class OpenAIProviderTests(unittest.IsolatedAsyncioTestCase):
         attack = "nta 7mar maktfham walo"
         self.assertIn(criticism, build_openai_input(criticism, "analyze", None))
         self.assertIn(attack, build_openai_input(attack, "calm", None))
+
+
+class HealthEndpointTests(unittest.TestCase):
+    def test_health_describes_only_the_active_provider(self):
+        response = asyncio.run(main.health_check()).model_dump()
+
+        self.assertEqual(
+            set(response), {"status", "version", "provider", "configured", "model"}
+        )
+        self.assertEqual(response["provider"], "openai")
+        self.assertNotIn("gemini_configured", response)
+        self.assertNotIn("gemini_model", response)
+
+
 if __name__ == "__main__":
     unittest.main()

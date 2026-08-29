@@ -8,11 +8,8 @@ uvicorn[standard]>=0.27.0
 # Environment & Config
 python-dotenv>=1.0.0
 
-# HTTP Client (for Gemini API calls)
+# HTTP client for provider API calls
 httpx>=0.26.0
-
-# Google Gemini SDK (official)
-google-generativeai>=0.4.0
 
 # Validation
 pydantic>=2.5.0

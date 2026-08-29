@@ -1,7 +1,7 @@
 """
 KeyCare Backend API
 ===========================
-FastAPI server that provides AI-powered communication mediation using Gemini 3.
+FastAPI server for KeyCare's OpenAI-powered communication engine. Built with Codex.
 """
 
 import os
@@ -105,7 +105,7 @@ REWRITE_BLOCKLIST = {
 # ============================================
 app = FastAPI(
     title="KeyCare API",
-    description="AI-powered communication mediation using Gemini 3",
+    description="Morocco-first AI communication layer powered by OpenAI. Built with Codex.",
     version="1.0.0",
 )
 
@@ -164,12 +164,9 @@ class HealthResponse(BaseModel):
     """Response body for the /health endpoint."""
     status: str
     version: str
-    gemini_configured: bool
-    gemini_model: str
-    cache_size: int
-    transform_provider: str
-    transform_configured: bool
-    transform_model: str
+    provider: str
+    configured: bool
+    model: str
 
 
 class TransformRequest(BaseModel):
@@ -735,17 +732,14 @@ async def health_check():
     """
     Health check endpoint.
     
-    Returns the API status and whether Gemini is configured.
+    Returns service and active provider status without calling OpenAI.
     """
     return HealthResponse(
         status="healthy",
         version=VERSION,
-        gemini_configured=bool(GEMINI_API_KEY),
-        gemini_model=GEMINI_MODEL,
-        cache_size=len(_response_cache),
-        transform_provider="openai",
-        transform_configured=bool(OPENAI_API_KEY),
-        transform_model=OPENAI_MODEL,
+        provider="openai",
+        configured=bool(OPENAI_API_KEY),
+        model=OPENAI_MODEL,
     )
 
 

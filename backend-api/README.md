@@ -1,6 +1,6 @@
 # KeyCare Backend API
 
-FastAPI server providing AI-powered communication mediation for KeyCare clients.
+FastAPI server providing the OpenAI-powered communication engine shared by KeyCare clients. Built with Codex.
 
 ## Quick Start
 
@@ -29,15 +29,15 @@ The shared `/api/v1/transform` endpoint uses the server-side OpenAI Responses AP
 GET /health
 ```
 
-### Mediate Message
+### Transform Message
 ```
-POST /mediate
+POST /api/v1/transform
 Content-Type: application/json
 
 {
-  "text": "Your message here",
-  "tone": "calm",
-  "lang_hint": "auto"
+  "text": "wach n9dro ndecaliw meeting l vendredi?",
+  "action": "translate",
+  "target_language": "en"
 }
 ```
 
@@ -51,7 +51,7 @@ Once running, visit:
 
 The existing demo backend is hosted on Heroku at:
 
-`https://keycare-gemini3-api-2587283546dc.herokuapp.com`
+`https://keycare-codex-api-ef6679e530e7.herokuapp.com`
 
 Heroku runs the backend with the command in `Procfile`:
 
@@ -69,7 +69,7 @@ The current repository is a multi-project repository, while the existing Heroku 
 Verify deployment without invoking OpenAI:
 
 ```bash
-curl https://keycare-gemini3-api-2587283546dc.herokuapp.com/health
+curl https://keycare-codex-api-ef6679e530e7.herokuapp.com/health
 ```
 
 The health endpoint reports service/provider configuration status but never calls OpenAI and never returns credentials.
