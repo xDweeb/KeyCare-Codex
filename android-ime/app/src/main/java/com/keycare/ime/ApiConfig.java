@@ -14,17 +14,18 @@ public final class ApiConfig {
     }
     
     /**
-     * Production API base URL (Heroku).
-     * IMPORTANT: This is hardcoded and NOT configurable by users.
+     * Demo API base URL supplied by the Android build configuration.
+     * Only the public backend URL belongs in the client; provider keys stay server-side.
      * Uses HTTPS for secure communication.
      */
-    public static final String BASE_URL = "https://keycare-gemini3-api-2587283546dc.herokuapp.com";
+    public static final String BASE_URL = BuildConfig.KEYCARE_API_BASE_URL;
     
     /**
      * API Endpoints
      */
     public static final String ENDPOINT_HEALTH = "/health";
     public static final String ENDPOINT_MEDIATE = "/mediate";
+    public static final String ENDPOINT_TRANSFORM = "/api/v1/transform";
     public static final String ENDPOINT_DETECT = "/mediate";  // Legacy alias
     public static final String ENDPOINT_REWRITE = "/mediate"; // Legacy alias
     

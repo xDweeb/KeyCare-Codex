@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -78,7 +79,7 @@ public class KeyCareIME extends InputMethodService {
     private Button /* REMOVED: rewriteButton - using bannerCtaButton only */ unusedRewriteButton;
     private LinearLayout rewritePanel, riskBanner, clipboardPanel, emojiPanel;
     private TextView suggestionCalm, suggestionFirm, suggestionEducational;
-    private Button closeRewritePanel, bannerCtaButton;
+    private Button closeRewritePanel, bannerCtaButton, keycareAiButton;
     private TextView bannerTitle, bannerSubtitle;
     private TextView clipboardContent;
     private Button btnPasteClipboard, closeClipboardPanel;
@@ -241,7 +242,7 @@ public class KeyCareIME extends InputMethodService {
         // When tone changes, fetch new suggestions
         fixAiController.setOnToneChangedListener(tone -> {
             if (currentText.length() > 0) {
-                fetchFixAiSuggestions(currentText.toString(), tone.value);
+                fetchFixAiSuggestions(currentText.toString(), tone.value, null);
             }
         });
         
@@ -553,6 +554,7 @@ public class KeyCareIME extends InputMethodService {
         bannerTitle = keyboardView.findViewById(R.id.bannerTitle);
         bannerSubtitle = keyboardView.findViewById(R.id.bannerSubtitle);
         bannerCtaButton = keyboardView.findViewById(R.id.bannerCtaButton);
+        keycareAiButton = keyboardView.findViewById(R.id.keycareAiButton);
 
         clipboardContent = keyboardView.findViewById(R.id.clipboardContent);
         btnPasteClipboard = keyboardView.findViewById(R.id.btnPasteClipboard);
@@ -570,9 +572,13 @@ public class KeyCareIME extends InputMethodService {
             bannerCtaButton.setOnClickListener(v -> {
                 if (currentText.length() > 0) {
                     animateButtonPress(v);
-                    openFixAiBottomSheet();
+                    showKeyCareAiMenu(v);
                 }
             });
+        }
+
+        if (keycareAiButton != null) {
+            keycareAiButton.setOnClickListener(v -> showKeyCareAiMenu(v));
         }
 
         // Close panel
@@ -1941,6 +1947,57 @@ public class KeyCareIME extends InputMethodService {
     }
 
     // ==================== FIX AI BOTTOM SHEET ====================
+
+    private void showKeyCareAiMenu(View anchor) {
+        if (currentText.length() == 0) {
+            Toast.makeText(this, "Type a message first", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        PopupMenu menu = new PopupMenu(this, anchor);
+        menu.getMenu().add(0, 1, 0, "Improve");
+        menu.getMenu().add(0, 2, 1, "Professional");
+        menu.getMenu().add(0, 3, 2, "Calm");
+        menu.getMenu().add(0, 4, 3, "Tone Check");
+        menu.getMenu().add(0, 5, 4, "Translate to French");
+        menu.getMenu().add(0, 6, 5, "Translate to Arabic");
+        menu.getMenu().add(0, 7, 6, "Translate to English");
+        menu.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case 1:
+                    openKeyCareAiAction("improve", null);
+                    return true;
+                case 2:
+                    openKeyCareAiAction("professional", null);
+                    return true;
+                case 3:
+                    openKeyCareAiAction("calm", null);
+                    return true;
+                case 4:
+                    openKeyCareAiAction("analyze", null);
+                    return true;
+                case 5:
+                    openKeyCareAiAction("translate", "fr");
+                    return true;
+                case 6:
+                    openKeyCareAiAction("translate", "ar");
+                    return true;
+                case 7:
+                    openKeyCareAiAction("translate", "en");
+                    return true;
+                default:
+                    return false;
+            }
+        });
+        menu.show();
+    }
+
+    private void openKeyCareAiAction(String action, String targetLanguage) {
+        if (fixAiController == null || currentText.length() == 0) return;
+        hideRewritePanel();
+        fixAiController.showLoading();
+        fetchFixAiSuggestions(currentText.toString(), action, targetLanguage);
+    }
     
     /**
      * Open the Fix AI bottom sheet and fetch suggestions.
@@ -1980,7 +2037,7 @@ public class KeyCareIME extends InputMethodService {
             Log.d(TAG, "No Gemini rewrite, fetching from API");
             fixAiController.showLoading();
             String tone = fixAiController.getCurrentTone().value;
-            fetchFixAiSuggestions(currentText.toString(), tone);
+            fetchFixAiSuggestions(currentText.toString(), tone, null);
         }
     }
     
@@ -1999,7 +2056,7 @@ public class KeyCareIME extends InputMethodService {
      * Fetch suggestions from API (with fallback).
      * SAFE: Handles all errors gracefully, never crashes.
      */
-    private void fetchFixAiSuggestions(String text, String tone) {
+    private void fetchFixAiSuggestions(String text, String action, String targetLanguage) {
         if (rewriteApiClient == null) {
             Log.e(TAG, "RewriteApiClient is null");
             return;
@@ -2009,9 +2066,9 @@ public class KeyCareIME extends InputMethodService {
         String riskLabel = currentLabel;
         double riskScoreVal = currentScore;
         
-        Log.d(TAG, "Fetching rewrite - lang: " + lang + ", tone: " + tone);
+        Log.d(TAG, "Fetching transform - action: " + action);
         
-        rewriteApiClient.requestRewrite(text, lang, tone, riskLabel, riskScoreVal,
+        rewriteApiClient.requestRewrite(text, lang, action, targetLanguage, riskLabel, riskScoreVal,
             new RewriteApiClient.RewriteCallback() {
                 @Override
                 public void onSuccess(java.util.List<RewriteApiClient.Suggestion> suggestions) {
