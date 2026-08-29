@@ -6,7 +6,6 @@ export const manifest = defineManifest({
   version: "1.0.4",
   description:
     "Think before you send. AI communication intelligence for Darija, Arabizi, Arabic, French, and English.",
-  homepage_url: "https://keycare.ma",
   icons: {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
@@ -32,15 +31,11 @@ export const manifest = defineManifest({
       matches: ["http://*/*", "https://*/*"],
       js: ["src/content/content.ts"],
       run_at: "document_idle",
-      all_frames: true,
     },
   ],
-  permissions: ["storage", "clipboardWrite"],
+  permissions: ["clipboardWrite"],
   host_permissions: [
-    "http://localhost:*/*",
-    "http://127.0.0.1:*/*",
-    "https://api.keycare.ma/*",
-    "https://*.keycare.ma/*",
+    "https://keycare-codex-api-ef6679e530e7.herokuapp.com/*",
   ],
   content_security_policy: {
     extension_pages: "script-src 'self'; object-src 'self'",

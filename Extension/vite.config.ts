@@ -1,5 +1,4 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
 import { crx } from "@crxjs/vite-plugin";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -8,7 +7,7 @@ import { manifest } from "./manifest.config";
 const rootDir = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  plugins: [react(), crx({ manifest })],
+  plugins: [crx({ manifest })],
   resolve: {
     alias: {
       "@": resolve(rootDir, "src"),
