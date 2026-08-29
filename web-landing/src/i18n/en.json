@@ -10,7 +10,7 @@
     "subtitle": "KeyCare understands Darija, Arabic, French, English, Arabizi, and the way Moroccans naturally mix them—then helps you improve your message without changing your intent.",
     "tryDemo": "Try the web demo", "checkAvailability": "Check availability", "signalsLabel": "Key product principles",
     "signalLanguages": "Built for mixed-language messages", "signalControl": "You choose every suggestion", "signalPrivacy": "Messages are not stored by default",
-    "previewLabel": "Example of a KeyCare professional rewrite", "previewAction": "Professional"
+    "previewLabel": "Preview of KeyCare actions connected through the shared API", "previewAction": "Production API"
   },
   "demo": {
     "eyebrow": "Interactive MVP", "title": "Say it your way. Refine it with care.",
@@ -18,7 +18,7 @@
     "messageLabel": "Your message", "placeholder": "Write a message in any supported language…", "examplesLabel": "Examples:",
     "example1": "Arabizi + French", "example2": "Darija + Arabic", "example3": "French + English", "actionLabel": "What would you like KeyCare to do?", "targetLabel": "Translate to",
     "transformButton": "Create suggestion", "analyzeButton": "Check tone", "loading": "Working on your message…",
-    "mockMode": "Contract-compatible demo data — no message leaves this browser", "liveMode": "Connected to the KeyCare API",
+    "liveMode": "Connected to the production KeyCare API",
     "emptyTitle": "Your result will appear here", "emptyText": "Choose an action and submit your message. Your original always remains under your control.",
     "emptyError": "Enter a message to continue.", "timeoutError": "The request took too long. Your original message is unchanged.",
     "serviceError": "KeyCare could not process this message right now. Please try again.", "copyError": "Copying was blocked by your browser. Select the suggestion and copy it manually.",
@@ -60,7 +60,7 @@
   },
   "availability": {
     "eyebrow": "Honest product status", "title": "What you can use today", "subtitle": "This page distinguishes the working web demo from packages and integrations that are still being prepared.",
-    "web": { "label": "Web", "status": "Demo ready", "title": "Interactive web app", "description": "Try all six MVP actions with multilingual examples and contract-compatible local demo responses or a configured backend.", "cta": "Open the demo" },
+    "web": { "label": "Web", "status": "Demo ready", "title": "Interactive web app", "description": "Try all six MVP actions with multilingual examples and live results from the production KeyCare API.", "cta": "Open the demo" },
     "android": { "label": "Android", "status": "Build-dependent", "title": "Custom keyboard", "description": "The Android keyboard is a separate MVP surface. An APK link appears here only when a reviewed build URL is configured.", "cta": "Download reviewed APK", "unavailable": "No public APK is linked yet" },
     "extension": { "label": "Browser", "status": "In development", "title": "Browser extension", "description": "The browser integration is a coordinated MVP workstream and is not presented here as a public store release.", "unavailable": "Public download coming later" }
   },
@@ -71,9 +71,9 @@
     "privacy": {
       "title": "Privacy notice", "intro": "This notice describes the privacy behavior intended for the KeyCare hackathon MVP. It covers the public web demo and the shared processing principles used across product surfaces.",
       "sections": {
-        "processing": { "title": "What is processed", "content": "KeyCare processes only the message text, selected action, and optional target language needed to fulfill the request. The local demo mode does not send the message outside your browser. When a backend is configured, the message is sent to that KeyCare endpoint over the network." },
+        "processing": { "title": "What is processed", "content": "KeyCare processes only the message text, selected action, and optional target language needed to fulfill the request. When you submit, the message is sent securely to the production KeyCare API over the network for the current request." },
         "storage": { "title": "Storage and accounts", "content": "The MVP does not require an account, payment, or a persistent message database. Messages are not stored by default. Browser language preference may be kept locally on your device." },
-        "providers": { "title": "AI providers and security", "content": "A configured backend may send request text to an AI provider to produce the result. Private provider credentials remain on the backend and are never included in client code, browser requests, or results." },
+        "providers": { "title": "AI providers and security", "content": "The production backend may send request text to an AI provider to produce the result. Private provider credentials remain on the backend and are never included in client code, browser requests, or results." },
         "rights": { "title": "Your control", "content": "KeyCare never sends a message on your behalf. The original and suggestion are shown separately. You can copy, edit, dismiss, or ignore every suggestion." },
         "contact": { "title": "Contact", "content": "For privacy questions, contact {{email}}." }
       }

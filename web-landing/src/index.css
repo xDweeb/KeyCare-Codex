@@ -109,7 +109,7 @@ select { min-height: 45px; padding: 0 12px; border: 1px solid var(--line); borde
 .submit-button { width: 100%; margin-top: 20px; }
 .demo-mode { margin: 15px 0 0; display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--muted); font-size: .7rem; text-align: center; }
 .demo-mode span { width: 7px; height: 7px; border-radius: 50%; }
-.demo-mode .mock { background: var(--sand); }.demo-mode .live { background: var(--mint); box-shadow: 0 0 10px var(--mint); }
+.demo-mode .live { background: var(--mint); box-shadow: 0 0 10px var(--mint); }
 .result-panel { display: flex; background: linear-gradient(150deg, rgba(86, 239, 192, .045), transparent), #09130f; }
 .empty-result { max-width: 340px; margin: auto; text-align: center; }
 .empty-result > span { width: 72px; height: 72px; margin: 0 auto 20px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 20px; color: var(--mint); background: var(--panel); font-weight: 800; }

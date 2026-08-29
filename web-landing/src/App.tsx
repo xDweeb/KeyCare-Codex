@@ -13,7 +13,8 @@ interface TransformResponse {
 
 const ACTIONS: Action[] = ['improve', 'professional', 'translate', 'calm', 'respectful', 'analyze'];
 const TARGET_LANGUAGES: Language[] = ['darija', 'ar', 'fr', 'en'];
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '');
+const PRODUCTION_API_URL = 'https://keycare-codex-api-ef6679e530e7.herokuapp.com';
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || PRODUCTION_API_URL).replace(/\/$/, '');
 const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL || 'contact@keycare.email';
 const ANDROID_DOWNLOAD_URL = import.meta.env.VITE_ANDROID_DOWNLOAD_URL || '';
 const examples = [
@@ -22,59 +23,41 @@ const examples = [
   "Merci, that's exactly what I needed!",
 ];
 
-function detectSignals(text: string) {
-  const languages: string[] = [];
-  if (/[\u0600-\u06ff]/.test(text)) languages.push('arabic', 'darija');
-  if (/\b(wach|n9dro|bzaf|had|ndecaliw|salam|3afak)\b/i.test(text)) languages.push('darija');
-  if (/\b(merci|bonjour|réunion|vendredi)\b/i.test(text)) languages.push('french');
-  if (/\b(the|meeting|needed|please|thanks)\b/i.test(text)) languages.push('english');
-  const detected = [...new Set(languages)];
-  return {
-    detected_languages: detected.length ? detected : ['uncertain'],
-    code_switched: detected.length > 1,
-    arabizi: /\b\w*[23789]\w*\b/i.test(text) || /\b(wach|n9dro|bzaf)\b/i.test(text),
-    tone: /غاضب|ما عجبنيش|angry|hate/i.test(text) ? 'frustrated' : /merci|thanks|needed/i.test(text) ? 'friendly' : 'neutral',
-  };
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null;
 }
 
-function mockTransform(text: string, action: Action, targetLanguage: Language): TransformResponse {
-  const translations: Record<Language, string> = {
-    darija: 'واش ممكن نأجلو الميتينغ حتى للجمعة؟',
-    ar: 'هل يمكننا تأجيل الاجتماع إلى يوم الجمعة؟',
-    fr: 'Serait-il possible de reporter la réunion à vendredi ?',
-    en: 'Could we move the meeting to Friday?',
-  };
-  const results: Record<Action, string> = {
-    improve: /[\u0600-\u06ff]/.test(text) ? 'أنا منزعج من هاد التعامل وبغيت نلقاو ليه حل.' : 'Salam, wach momkin n’ajlou l-meeting l-vendredi?',
-    professional: 'Bonjour, serait-il possible de reporter la réunion à vendredi ?',
-    translate: translations[targetLanguage],
-    calm: 'أنا منزعج من هاد التعامل وبغيت نلقاو حل مناسب بهدوء.',
-    respectful: 'عفاك، واش ممكن نراجعو هاد النقطة ونلقاو حل مناسب؟',
-    analyze: text,
-  };
-  return {
-    result: results[action], analysis: detectSignals(text),
-    meta: { action, target_language: action === 'translate' ? targetLanguage : null },
-  };
+function isTransformResponse(value: unknown): value is TransformResponse {
+  if (!isRecord(value) || !isRecord(value.analysis) || !isRecord(value.meta)) return false;
+
+  return typeof value.result === 'string'
+    && Array.isArray(value.analysis.detected_languages)
+    && value.analysis.detected_languages.every((language) => typeof language === 'string')
+    && typeof value.analysis.code_switched === 'boolean'
+    && typeof value.analysis.arabizi === 'boolean'
+    && typeof value.analysis.tone === 'string'
+    && ACTIONS.includes(value.meta.action as Action)
+    && (value.meta.target_language === null || TARGET_LANGUAGES.includes(value.meta.target_language as Language));
+}
+
+function getApiErrorMessage(value: unknown) {
+  if (!isRecord(value) || !isRecord(value.error) || typeof value.error.message !== 'string') return 'request_failed';
+  return value.error.message;
 }
 
 async function requestTransform(text: string, action: Action, targetLanguage: Language) {
-  if (!API_BASE_URL) {
-    await new Promise((resolve) => window.setTimeout(resolve, 550));
-    return mockTransform(text, action, targetLanguage);
-  }
   const controller = new AbortController();
-  const timeout = window.setTimeout(() => controller.abort(), 15_000);
+  const timeout = window.setTimeout(() => controller.abort(), 30_000);
   try {
     const response = await fetch(`${API_BASE_URL}/api/v1/transform`, {
       method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({ text, action, ...(action === 'translate' ? { target_language: targetLanguage } : {}) }),
       signal: controller.signal,
     });
-    const payload = await response.json().catch(() => null);
-    if (!response.ok) throw new Error(`api:${payload?.error?.message || 'request_failed'}`);
-    if (!payload?.result || !payload?.analysis || !payload?.meta) throw new Error('invalid_response');
-    return payload as TransformResponse;
+    const payload: unknown = await response.json().catch(() => null);
+    if (!response.ok) throw new Error(`api:${getApiErrorMessage(payload)}`);
+    if (!isTransformResponse(payload)) throw new Error('invalid_response');
+    return payload;
   } finally {
     window.clearTimeout(timeout);
   }
@@ -140,8 +123,8 @@ function Hero() {
         <div className="message message-one" dir="ltr">wach n9dro ndecaliw meeting l vendredi?</div>
         <div className="ai-card">
           <div className="ai-card-top"><span className="status-dot" /> KeyCare <small>{t('hero.previewAction')}</small></div>
-          <p dir="ltr">Serait-il possible de reporter la réunion à vendredi&nbsp;?</p>
-          <div className="analysis-row"><span>Darija</span><span>Français</span><span>Arabizi</span></div>
+          <p>{t('actions.improve')} · {t('actions.professional')} · {t('actions.translate')}</p>
+          <div className="analysis-row"><span>{t('actions.calm')}</span><span>{t('actions.respectful')}</span><span>{t('actions.analyze')}</span></div>
         </div>
         <div className="message message-two" dir="rtl">المعنى ديالك، بصياغة أوضح.</div>
       </div>
@@ -158,8 +141,6 @@ function ProductDemo() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'error'>('idle');
   const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
-  const isMock = !API_BASE_URL;
-
   useEffect(() => { setResult(null); setError(''); setCopied(false); }, [text, action, targetLanguage]);
   const characterCount = useMemo(() => `${text.length}/2000`, [text.length]);
   const submit = async (event: FormEvent) => {
@@ -195,7 +176,7 @@ function ProductDemo() {
           </div></fieldset>
           {action === 'translate' && <div className="target-field"><label htmlFor="target-language">{t('demo.targetLabel')}</label><select id="target-language" value={targetLanguage} onChange={(event) => setTargetLanguage(event.target.value as Language)}>{TARGET_LANGUAGES.map((language) => <option key={language} value={language}>{t(`languages.${language}`)}</option>)}</select></div>}
           <button className="button primary submit-button" type="submit" disabled={status === 'loading'}>{status === 'loading' ? t('demo.loading') : action === 'analyze' ? t('demo.analyzeButton') : t('demo.transformButton')}</button>
-          <p className="demo-mode"><span className={isMock ? 'mock' : 'live'} />{isMock ? t('demo.mockMode') : t('demo.liveMode')}</p>
+          <p className="demo-mode"><span className="live" />{t('demo.liveMode')}</p>
         </form>
         <div className="result-panel" aria-live="polite" aria-busy={status === 'loading'}>
           {error && <div className="error-message" role="alert">{error}</div>}

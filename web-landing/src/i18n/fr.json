@@ -10,7 +10,7 @@
     "subtitle": "KeyCare comprend la darija, l’arabe, le français, l’anglais, l’arabizi et la façon naturelle dont les Marocains les mélangent, puis améliore votre message sans changer votre intention.",
     "tryDemo": "Essayer la démo web", "checkAvailability": "Voir la disponibilité", "signalsLabel": "Principes clés du produit",
     "signalLanguages": "Conçu pour les messages multilingues", "signalControl": "Vous choisissez chaque suggestion", "signalPrivacy": "Les messages ne sont pas stockés par défaut",
-    "previewLabel": "Exemple de reformulation professionnelle KeyCare", "previewAction": "Professionnel"
+    "previewLabel": "Aperçu des actions KeyCare connectées par l’API partagée", "previewAction": "API de production"
   },
   "demo": {
     "eyebrow": "MVP interactif", "title": "Dites-le à votre façon. Affinez-le avec soin.",
@@ -18,7 +18,7 @@
     "messageLabel": "Votre message", "placeholder": "Écrivez un message dans une langue prise en charge…", "examplesLabel": "Exemples :",
     "example1": "Arabizi + français", "example2": "Darija + arabe", "example3": "Français + anglais", "actionLabel": "Que doit faire KeyCare ?", "targetLabel": "Traduire vers",
     "transformButton": "Créer une suggestion", "analyzeButton": "Vérifier le ton", "loading": "Traitement de votre message…",
-    "mockMode": "Données de démo compatibles avec le contrat — le message reste dans ce navigateur", "liveMode": "Connecté à l’API KeyCare",
+    "liveMode": "Connecté à l’API KeyCare de production",
     "emptyTitle": "Votre résultat apparaîtra ici", "emptyText": "Choisissez une action et envoyez votre message. L’original reste toujours sous votre contrôle.",
     "emptyError": "Saisissez un message pour continuer.", "timeoutError": "La requête a pris trop de temps. Votre message original reste inchangé.",
     "serviceError": "KeyCare ne peut pas traiter ce message pour le moment. Réessayez.", "copyError": "La copie a été bloquée par votre navigateur. Sélectionnez la suggestion et copiez-la manuellement.",
@@ -60,7 +60,7 @@
   },
   "availability": {
     "eyebrow": "État du produit transparent", "title": "Ce que vous pouvez utiliser aujourd’hui", "subtitle": "Cette page distingue la démo web fonctionnelle des paquets et intégrations encore en préparation.",
-    "web": { "label": "Web", "status": "Démo prête", "title": "Application web interactive", "description": "Essayez les six actions du MVP avec des exemples multilingues et des réponses locales compatibles ou un backend configuré.", "cta": "Ouvrir la démo" },
+    "web": { "label": "Web", "status": "Démo prête", "title": "Application web interactive", "description": "Essayez les six actions du MVP avec des exemples multilingues et des résultats en direct fournis par l’API KeyCare de production.", "cta": "Ouvrir la démo" },
     "android": { "label": "Android", "status": "Selon le build", "title": "Clavier personnalisé", "description": "Le clavier Android est une interface MVP distincte. Un lien APK n’apparaît que lorsqu’une URL de build validé est configurée.", "cta": "Télécharger l’APK validé", "unavailable": "Aucun APK public n’est lié pour le moment" },
     "extension": { "label": "Navigateur", "status": "En développement", "title": "Extension de navigateur", "description": "L’intégration navigateur est un chantier MVP coordonné et n’est pas présentée comme disponible sur une boutique publique.", "unavailable": "Téléchargement public à venir" }
   },
@@ -71,9 +71,9 @@
     "privacy": {
       "title": "Notice de confidentialité", "intro": "Cette notice décrit le fonctionnement prévu du MVP KeyCare en matière de confidentialité. Elle couvre la démo web publique et les principes de traitement partagés entre les interfaces.",
       "sections": {
-        "processing": { "title": "Données traitées", "content": "KeyCare traite uniquement le texte du message, l’action choisie et la langue cible éventuelle nécessaires à la demande. Le mode démo local n’envoie pas le message hors de votre navigateur. Si un backend est configuré, le message est transmis à ce point d’accès KeyCare." },
+        "processing": { "title": "Données traitées", "content": "KeyCare traite uniquement le texte du message, l’action choisie et la langue cible éventuelle nécessaires à la demande. Lorsque vous validez, le message est transmis de manière sécurisée à l’API KeyCare de production pour la requête en cours." },
         "storage": { "title": "Stockage et comptes", "content": "Le MVP ne nécessite ni compte, ni paiement, ni base persistante de messages. Les messages ne sont pas stockés par défaut. La préférence de langue peut être conservée localement sur votre appareil." },
-        "providers": { "title": "Fournisseurs d’IA et sécurité", "content": "Un backend configuré peut transmettre le texte à un fournisseur d’IA pour produire le résultat. Les identifiants privés restent sur le backend et ne figurent jamais dans le code client, les requêtes du navigateur ou les résultats." },
+        "providers": { "title": "Fournisseurs d’IA et sécurité", "content": "Le backend de production peut transmettre le texte à un fournisseur d’IA pour produire le résultat. Les identifiants privés restent sur le backend et ne figurent jamais dans le code client, les requêtes du navigateur ou les résultats." },
         "rights": { "title": "Votre contrôle", "content": "KeyCare n’envoie jamais de message à votre place. L’original et la suggestion sont affichés séparément. Vous pouvez copier, modifier, ignorer ou supprimer chaque suggestion." },
         "contact": { "title": "Contact", "content": "Pour toute question de confidentialité, contactez {{email}}." }
       }

@@ -8,8 +8,7 @@ The public KeyCare experience and interactive hackathon MVP demo. It is built wi
 - English, French, and Arabic translations, including right-to-left layout
 - Responsive mobile-product walkthrough using the reviewed screenshots in `public/assets/screens/`
 - All six P0 actions from the shared contract: improve, professional, translate, calm, respectful, and tone check
-- Contract-compatible local demo responses when no backend is configured
-- Live `POST /api/v1/transform` integration when an API origin is configured
+- Live `POST /api/v1/transform` integration with the production KeyCare API by default
 - Separate privacy and MVP terms routes
 - Honest availability states for the web demo, Android APK, and browser extension
 
@@ -26,7 +25,7 @@ copy .env.example .env
 npm run dev
 ```
 
-Open `http://localhost:5173`. Leaving `VITE_API_BASE_URL` empty uses local demo data and makes no message request outside the browser.
+Open `http://localhost:5173`. The app uses the production KeyCare API unless `VITE_API_BASE_URL` is intentionally overridden for local backend integration testing.
 
 ## Configuration
 
@@ -34,11 +33,11 @@ All variables are public build-time configuration. Never put an AI provider key 
 
 | Variable | Required | Purpose |
 | --- | --- | --- |
-| `VITE_API_BASE_URL` | No | Backend origin, such as `http://localhost:8000`. The app adds `/api/v1/transform`. |
+| `VITE_API_BASE_URL` | No | Optional backend origin override. Defaults to `https://keycare-codex-api-ef6679e530e7.herokuapp.com`; the app adds `/api/v1/transform`. |
 | `VITE_ANDROID_DOWNLOAD_URL` | No | Reviewed, hosted APK URL. Without it, the site accurately says no public APK is linked. |
 | `VITE_CONTACT_EMAIL` | No | Public contact address. Defaults to `contact@keycare.email`. |
 
-When connecting the backend, its CORS configuration must allow the deployed web origin. The client times out after 15 seconds, preserves the original text, and displays the API error envelope when it contains a safe message.
+The production backend's CORS configuration must allow the deployed web origin. The client times out after 30 seconds, preserves the original text, and displays the API error envelope when it contains a safe message.
 
 ## Validation
 
